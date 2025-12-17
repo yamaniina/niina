@@ -1,0 +1,170 @@
+:root {
+  --bg: #0e1a2b;
+  --panel: #14263d;
+  --accent: #ffce54;
+  --text: #e7efff;
+  --muted: #9bb0c8;
+  --border: #1f3652;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #1d3150, #0e1a2b 40%),
+    radial-gradient(circle at 80% 0%, #233d64, transparent 45%),
+    linear-gradient(180deg, #0f2036 0%, #0b1526 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: 24px;
+  text-align: center;
+  background: #0c1830;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.app-header h1 {
+  margin: 0 0 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.control-row.tts-row input[type="range"] {
+  width: 160px;
+}
+
+select,
+button,
+label input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+select,
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0c1c32;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+button {
+  background: linear-gradient(90deg, #1e4876, #15355a);
+  border: 1px solid #1c3a63;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button.secondary {
+  background: #0c1c32;
+  border: 1px solid var(--border);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.hint {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.playback-panel h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.status {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #102846;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.poem-display {
+  background: #0d213a;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.poem-id,
+.poem-kimi {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.poem-text {
+  margin: 0;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.queue-info {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.inline-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 480px) {
+  .control-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button,
+  select {
+    width: 100%;
+  }
+}
