@@ -1,0 +1,1011 @@
+[
+  {
+    "id": "JYO",
+    "type": "joka",
+    "title": "序歌",
+    "text": "ナニワヅニ サクヤコノハナ フユゴモリ イマヲハルベト サクヤコノハナ",
+    "kimariji_len": 0
+  },
+  {
+    "id": "001",
+    "type": "poem",
+    "kami_kana": "アキノタノ カリオノイオノ トマオアラミ",
+    "shimo_kana": "ワガコロモデワ ツユニヌレツツ",
+    "kami": "アキノタノ カリオノイオノ トマオアラミ",
+    "shimo": "ワガコロモデワ ツユニヌレツツ",
+    "kimariji_len": 3,
+    "kimariji": "アキノ"
+  },
+  {
+    "id": "002",
+    "type": "poem",
+    "kami_kana": "ハルスギテ ナツキニケラシ シロタエノ",
+    "shimo_kana": "コロモホスチョー アマノカグヤマ",
+    "kami": "ハルスギテ ナツキニケラシ シロタエノ",
+    "shimo": "コロモホスチョー アマノカグヤマ",
+    "kimariji_len": 3,
+    "kimariji": "ハルス"
+  },
+  {
+    "id": "003",
+    "type": "poem",
+    "kami_kana": "アシビキノ ヤマドリノオノ シダリオノ",
+    "shimo_kana": "ナガナガシヨオ ヒトリカモネン",
+    "kami": "アシビキノ ヤマドリノオノ シダリオノ",
+    "shimo": "ナガナガシヨオ ヒトリカモネン",
+    "kimariji_len": 2,
+    "kimariji": "アシ"
+  },
+  {
+    "id": "004",
+    "type": "poem",
+    "kami_kana": "タゴノウラニ ウチイデテミレバ シロタエノ",
+    "shimo_kana": "フジノタカネニ ユキワフリツツ",
+    "kami": "タゴノウラニ ウチイデテミレバ シロタエノ",
+    "shimo": "フジノタカネニ ユキワフリツツ",
+    "kimariji_len": 2,
+    "kimariji": "タゴ"
+  },
+  {
+    "id": "005",
+    "type": "poem",
+    "kami_kana": "オクヤマニ モミジフミワケ ナクシカノ",
+    "shimo_kana": "コエキクトキゾ アキワカナシキ",
+    "kami": "オクヤマニ モミジフミワケ ナクシカノ",
+    "shimo": "コエキクトキゾ アキワカナシキ",
+    "kimariji_len": 2,
+    "kimariji": "オク"
+  },
+  {
+    "id": "006",
+    "type": "poem",
+    "kami_kana": "カササギノ ワタセルハシニ オクシモノ",
+    "shimo_kana": "シロキオミレバ ヨゾフケニケル",
+    "kami": "カササギノ ワタセルハシニ オクシモノ",
+    "shimo": "シロキオミレバ ヨゾフケニケル",
+    "kimariji_len": 2,
+    "kimariji": "カサ"
+  },
+  {
+    "id": "007",
+    "type": "poem",
+    "kami_kana": "アマノハラ フリサケミレバ カスガナル",
+    "shimo_kana": "ミカサノヤマニ イデシツキカモ",
+    "kami": "アマノハラ フリサケミレバ カスガナル",
+    "shimo": "ミカサノヤマニ イデシツキカモ",
+    "kimariji_len": 3,
+    "kimariji": "アマノ"
+  },
+  {
+    "id": "008",
+    "type": "poem",
+    "kami_kana": "ワガイオワ ミヤコノタツミ シカゾスム",
+    "shimo_kana": "ヨオウジヤマト ヒトワユーナリ",
+    "kami": "ワガイオワ ミヤコノタツミ シカゾスム",
+    "shimo": "ヨオウジヤマト ヒトワユーナリ",
+    "kimariji_len": 3,
+    "kimariji": "ワガイ"
+  },
+  {
+    "id": "009",
+    "type": "poem",
+    "kami_kana": "ハナノイロワ ウツリニケリナ イタズラニ",
+    "shimo_kana": "ワガミヨニフル ナガメセシマニ",
+    "kami": "ハナノイロワ ウツリニケリナ イタズラニ",
+    "shimo": "ワガミヨニフル ナガメセシマニ",
+    "kimariji_len": 3,
+    "kimariji": "ハナノ"
+  },
+  {
+    "id": "010",
+    "type": "poem",
+    "kami_kana": "コレヤコノ ユクモカエルモ ワカレテワ",
+    "shimo_kana": "シルモシラヌモ オーサカノセキ",
+    "kami": "コレヤコノ ユクモカエルモ ワカレテワ",
+    "shimo": "シルモシラヌモ オーサカノセキ",
+    "kimariji_len": 2,
+    "kimariji": "コレ"
+  },
+  {
+    "id": "011",
+    "type": "poem",
+    "kami_kana": "ワタノハラ ヤソシマカケテ コギイデヌト",
+    "shimo_kana": "ヒトニワツゲヨ アマノツリブネ",
+    "kami": "ワタノハラ ヤソシマカケテ コギイデヌト",
+    "shimo": "ヒトニワツゲヨ アマノツリブネ",
+    "kimariji_len": 6,
+    "kimariji": "ワタノハラヤ"
+  },
+  {
+    "id": "012",
+    "type": "poem",
+    "kami_kana": "アマツカゼ クモノカヨイジ フキトジヨ",
+    "shimo_kana": "オトメノスガタ シバシトドメン",
+    "kami": "アマツカゼ クモノカヨイジ フキトジヨ",
+    "shimo": "オトメノスガタ シバシトドメン",
+    "kimariji_len": 3,
+    "kimariji": "アマツ"
+  },
+  {
+    "id": "013",
+    "type": "poem",
+    "kami_kana": "ツクバネノ ミネヨリオツル ミナノガワ",
+    "shimo_kana": "コイゾツモリテ フチトナリヌル",
+    "kami": "ツクバネノ ミネヨリオツル ミナノガワ",
+    "shimo": "コイゾツモリテ フチトナリヌル",
+    "kimariji_len": 2,
+    "kimariji": "ツク"
+  },
+  {
+    "id": "014",
+    "type": "poem",
+    "kami_kana": "ミチノクノ シノブモジズリ タレユエニ",
+    "shimo_kana": "ミダレソメニシ ワレナラナクニ",
+    "kami": "ミチノクノ シノブモジズリ タレユエニ",
+    "shimo": "ミダレソメニシ ワレナラナクニ",
+    "kimariji_len": 2,
+    "kimariji": "ミチ"
+  },
+  {
+    "id": "015",
+    "type": "poem",
+    "kami_kana": "キミガタメ ハルノノニイデテ ワカナツム",
+    "shimo_kana": "ワガコロモデニ ユキワフリツツ",
+    "kami": "キミガタメ ハルノノニイデテ ワカナツム",
+    "shimo": "ワガコロモデニ ユキワフリツツ",
+    "kimariji_len": 6,
+    "kimariji": "キミガタメハ"
+  },
+  {
+    "id": "016",
+    "type": "poem",
+    "kami_kana": "タチワカレ イナバノヤマノ ミネニオール",
+    "shimo_kana": "マツトシキカバ イマカエリコン",
+    "kami": "タチワカレ イナバノヤマノ ミネニオール",
+    "shimo": "マツトシキカバ イマカエリコン",
+    "kimariji_len": 2,
+    "kimariji": "タチ"
+  },
+  {
+    "id": "017",
+    "type": "poem",
+    "kami_kana": "チハヤブル カミヨモキカズ タツタガワ",
+    "shimo_kana": "カラクレナイニ ミズククルトワ",
+    "kami": "チハヤブル カミヨモキカズ タツタガワ",
+    "shimo": "カラクレナイニ ミズククルトワ",
+    "kimariji_len": 2,
+    "kimariji": "チハ"
+  },
+  {
+    "id": "018",
+    "type": "poem",
+    "kami_kana": "スミノエノ キシニヨルナミ ヨルサエヤ",
+    "shimo_kana": "ユメノカヨイジ ヒトメヨクラン",
+    "kami": "スミノエノ キシニヨルナミ ヨルサエヤ",
+    "shimo": "ユメノカヨイジ ヒトメヨクラン",
+    "kimariji_len": 1,
+    "kimariji": "ス"
+  },
+  {
+    "id": "019",
+    "type": "poem",
+    "kami_kana": "ナニワガタ ミジカキアシノ フシノマモ",
+    "shimo_kana": "アワデコノヨオ スグシテヨトヤ",
+    "kami": "ナニワガタ ミジカキアシノ フシノマモ",
+    "shimo": "アワデコノヨオ スグシテヨトヤ",
+    "kimariji_len": 4,
+    "kimariji": "ナニワガ"
+  },
+  {
+    "id": "020",
+    "type": "poem",
+    "kami_kana": "ワビヌレバ イマハタオナジ ナニワナル",
+    "shimo_kana": "ミオツクシテモ アワントゾオモー",
+    "kami": "ワビヌレバ イマハタオナジ ナニワナル",
+    "shimo": "ミオツクシテモ アワントゾオモー",
+    "kimariji_len": 2,
+    "kimariji": "ワビ"
+  },
+  {
+    "id": "021",
+    "type": "poem",
+    "kami_kana": "イマコント イイシバカリニ ナガツキノ",
+    "shimo_kana": "アリアケノツキオ マチイデツルカナ",
+    "kami": "イマコント イイシバカリニ ナガツキノ",
+    "shimo": "アリアケノツキオ マチイデツルカナ",
+    "kimariji_len": 3,
+    "kimariji": "イマコ"
+  },
+  {
+    "id": "022",
+    "type": "poem",
+    "kami_kana": "フクカラニ アキノクサキノ シオルレバ",
+    "shimo_kana": "ムベヤマカゼオ アラシトユーラン",
+    "kami": "フクカラニ アキノクサキノ シオルレバ",
+    "shimo": "ムベヤマカゼオ アラシトユーラン",
+    "kimariji_len": 1,
+    "kimariji": "フ",
+    "audio_url": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCcqSSnYpz6QbFCiAZkwCdeAXrT20uPTiAEc8m4K_PIS20?e=QEJsFu",
+    "audio": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCcqSSnYpz6QbFCiAZkwCdeAXrT20uPTiAEc8m4K_PIS20?e=QEJsFu"
+  },
+  {
+    "id": "023",
+    "type": "poem",
+    "kami_kana": "ツキミレバ チジニモノコソ カナシケレ",
+    "shimo_kana": "ワガミヒトツノ アキニワアラネド",
+    "kami": "ツキミレバ チジニモノコソ カナシケレ",
+    "shimo": "ワガミヒトツノ アキニワアラネド",
+    "kimariji_len": 2,
+    "kimariji": "ツキ"
+  },
+  {
+    "id": "024",
+    "type": "poem",
+    "kami_kana": "コノタビワ ヌサモトリアエズ タムケヤマ",
+    "shimo_kana": "モミジノニシキ カミノマニマニ",
+    "kami": "コノタビワ ヌサモトリアエズ タムケヤマ",
+    "shimo": "モミジノニシキ カミノマニマニ",
+    "kimariji_len": 2,
+    "kimariji": "コノ"
+  },
+  {
+    "id": "025",
+    "type": "poem",
+    "kami_kana": "ナニシオワバ オーサカヤマノ サネカズラ",
+    "shimo_kana": "ヒトニシラレデ クルヨシモガナ",
+    "kami": "ナニシオワバ オーサカヤマノ サネカズラ",
+    "shimo": "ヒトニシラレデ クルヨシモガナ",
+    "kimariji_len": 3,
+    "kimariji": "ナニシ"
+  },
+  {
+    "id": "026",
+    "type": "poem",
+    "kami_kana": "オグラヤマ ミネノモミジバ ココロアラバ",
+    "shimo_kana": "イマヒトタビノ ミユキマタナン",
+    "kami": "オグラヤマ ミネノモミジバ ココロアラバ",
+    "shimo": "イマヒトタビノ ミユキマタナン",
+    "kimariji_len": 2,
+    "kimariji": "オグ"
+  },
+  {
+    "id": "027",
+    "type": "poem",
+    "kami_kana": "ミカノハラ ワキテナガルル イズミガワ",
+    "shimo_kana": "イツミキトテカ コイシカルラン",
+    "kami": "ミカノハラ ワキテナガルル イズミガワ",
+    "shimo": "イツミキトテカ コイシカルラン",
+    "kimariji_len": 3,
+    "kimariji": "ミカノ"
+  },
+  {
+    "id": "028",
+    "type": "poem",
+    "kami_kana": "ヤマザトワ フユゾサビシサ マサリケル",
+    "shimo_kana": "ヒトメモクサモ カレヌトオモエバ",
+    "kami": "ヤマザトワ フユゾサビシサ マサリケル",
+    "shimo": "ヒトメモクサモ カレヌトオモエバ",
+    "kimariji_len": 3,
+    "kimariji": "ヤマザ"
+  },
+  {
+    "id": "029",
+    "type": "poem",
+    "kami_kana": "ココロアテニ オラバヤオラン ハツシモノ",
+    "shimo_kana": "オキマドワセル シラギクノハナ",
+    "kami": "ココロアテニ オラバヤオラン ハツシモノ",
+    "shimo": "オキマドワセル シラギクノハナ",
+    "kimariji_len": 4,
+    "kimariji": "ココロア"
+  },
+  {
+    "id": "030",
+    "type": "poem",
+    "kami_kana": "アリアケノ ツレナクミエシ ワカレヨリ",
+    "shimo_kana": "アカツキバカリ ウキモノワナシ",
+    "kami": "アリアケノ ツレナクミエシ ワカレヨリ",
+    "shimo": "アカツキバカリ ウキモノワナシ",
+    "kimariji_len": 3,
+    "kimariji": "アリア"
+  },
+  {
+    "id": "031",
+    "type": "poem",
+    "kami_kana": "アサボラケ アリアケノツキト ミルマデニ",
+    "shimo_kana": "ヨシノノサトニ フレルシラユキ",
+    "kami": "アサボラケ アリアケノツキト ミルマデニ",
+    "shimo": "ヨシノノサトニ フレルシラユキ",
+    "kimariji_len": 6,
+    "kimariji": "アサボラケア"
+  },
+  {
+    "id": "032",
+    "type": "poem",
+    "kami_kana": "ヤマガワニ カゼノカケタル シガラミワ",
+    "shimo_kana": "ナガレモアエヌ モミジナリケリ",
+    "kami": "ヤマガワニ カゼノカケタル シガラミワ",
+    "shimo": "ナガレモアエヌ モミジナリケリ",
+    "kimariji_len": 3,
+    "kimariji": "ヤマガ"
+  },
+  {
+    "id": "033",
+    "type": "poem",
+    "kami_kana": "ヒサカタノ ヒカリノドケキ ハルノヒニ",
+    "shimo_kana": "シズゴコロナク ハナノチルラン",
+    "kami": "ヒサカタノ ヒカリノドケキ ハルノヒニ",
+    "shimo": "シズゴコロナク ハナノチルラン",
+    "kimariji_len": 2,
+    "kimariji": "ヒサ"
+  },
+  {
+    "id": "034",
+    "type": "poem",
+    "kami_kana": "タレオカモ シルヒトニセン タカサゴノ",
+    "shimo_kana": "マツモムカシノ トモナラナクニ",
+    "kami": "タレオカモ シルヒトニセン タカサゴノ",
+    "shimo": "マツモムカシノ トモナラナクニ",
+    "kimariji_len": 2,
+    "kimariji": "タレ"
+  },
+  {
+    "id": "035",
+    "type": "poem",
+    "kami_kana": "ヒトワイサ ココロモシラズ フルサトワ",
+    "shimo_kana": "ハナゾムカシノ カニニオイケル",
+    "kami": "ヒトワイサ ココロモシラズ フルサトワ",
+    "shimo": "ハナゾムカシノ カニニオイケル",
+    "kimariji_len": 3,
+    "kimariji": "ヒトワ"
+  },
+  {
+    "id": "036",
+    "type": "poem",
+    "kami_kana": "ナツノヨワ マダヨイナガラ アケヌルオ",
+    "shimo_kana": "クモノイズクニ ツキヤドルラン",
+    "kami": "ナツノヨワ マダヨイナガラ アケヌルオ",
+    "shimo": "クモノイズクニ ツキヤドルラン",
+    "kimariji_len": 2,
+    "kimariji": "ナツ"
+  },
+  {
+    "id": "037",
+    "type": "poem",
+    "kami_kana": "シラツユニ カゼノフキシク アキノノワ",
+    "shimo_kana": "ツラヌキトメヌ タマゾチリケル",
+    "kami": "シラツユニ カゼノフキシク アキノノワ",
+    "shimo": "ツラヌキトメヌ タマゾチリケル",
+    "kimariji_len": 2,
+    "kimariji": "シラ"
+  },
+  {
+    "id": "038",
+    "type": "poem",
+    "kami_kana": "ワスラルル ミオバオモワズ チカイテシ",
+    "shimo_kana": "ヒトノイノチノ オシクモアルカナ",
+    "kami": "ワスラルル ミオバオモワズ チカイテシ",
+    "shimo": "ヒトノイノチノ オシクモアルカナ",
+    "kimariji_len": 3,
+    "kimariji": "ワスラ"
+  },
+  {
+    "id": "039",
+    "type": "poem",
+    "kami_kana": "アサジウノ オノノシノハラ シノブレド",
+    "shimo_kana": "アマリテナドカ ヒトノコイシキ",
+    "kami": "アサジウノ オノノシノハラ シノブレド",
+    "shimo": "アマリテナドカ ヒトノコイシキ",
+    "kimariji_len": 3,
+    "kimariji": "アサジ"
+  },
+  {
+    "id": "040",
+    "type": "poem",
+    "kami_kana": "シノブレド イロニイデニケリ ワガコイワ",
+    "shimo_kana": "モノヤオモート ヒトノトーマデ",
+    "kami": "シノブレド イロニイデニケリ ワガコイワ",
+    "shimo": "モノヤオモート ヒトノトーマデ",
+    "kimariji_len": 2,
+    "kimariji": "シノ"
+  },
+  {
+    "id": "041",
+    "type": "poem",
+    "kami_kana": "コイスチョー ワガナワマダキ タチニケリ",
+    "shimo_kana": "ヒトシレズコソ オモイソメシカ",
+    "kami": "コイスチョー ワガナワマダキ タチニケリ",
+    "shimo": "ヒトシレズコソ オモイソメシカ",
+    "kimariji_len": 2,
+    "kimariji": "コイ"
+  },
+  {
+    "id": "042",
+    "type": "poem",
+    "kami_kana": "チギリキナ カタミニソデオ シボリツツ",
+    "shimo_kana": "スエノマツヤマ ナミコサジトワ",
+    "kami": "チギリキナ カタミニソデオ シボリツツ",
+    "shimo": "スエノマツヤマ ナミコサジトワ",
+    "kimariji_len": 4,
+    "kimariji": "チギリキ"
+  },
+  {
+    "id": "043",
+    "type": "poem",
+    "kami_kana": "アイミテノ ノチノココロニ クラブレバ",
+    "shimo_kana": "ムカシワモノオオモワザリケリ ",
+    "kami": "アイミテノ ノチノココロニ クラブレバ",
+    "shimo": "ムカシワモノオオモワザリケリ ",
+    "kimariji_len": 2,
+    "kimariji": "アイ"
+  },
+  {
+    "id": "044",
+    "type": "poem",
+    "kami_kana": "オーコトノ タエテシナクワ ナカナカニ",
+    "shimo_kana": "ヒトオモミオモ ウラミザラマシ",
+    "kami": "オーコトノ タエテシナクワ ナカナカニ",
+    "shimo": "ヒトオモミオモ ウラミザラマシ",
+    "kimariji_len": 3,
+    "kimariji": "オーコ"
+  },
+  {
+    "id": "045",
+    "type": "poem",
+    "kami_kana": "アワレトモ ユーベキヒトワ オモオエデ",
+    "shimo_kana": "ミノイタズラニ ナリヌベキカナ",
+    "kami": "アワレトモ ユーベキヒトワ オモオエデ",
+    "shimo": "ミノイタズラニ ナリヌベキカナ",
+    "kimariji_len": 3,
+    "kimariji": "アワレ"
+  },
+  {
+    "id": "046",
+    "type": "poem",
+    "kami_kana": "ユラノトオ ワタルフナビト カジオタエ",
+    "shimo_kana": "ユクエモシラヌ コイノミチカナ",
+    "kami": "ユラノトオ ワタルフナビト カジオタエ",
+    "shimo": "ユクエモシラヌ コイノミチカナ",
+    "kimariji_len": 2,
+    "kimariji": "ユラ"
+  },
+  {
+    "id": "047",
+    "type": "poem",
+    "kami_kana": "ヤエムグラ シゲレルヤドノ サビシキニ",
+    "shimo_kana": "ヒトコソミエネ アキワキニケリ",
+    "kami": "ヤエムグラ シゲレルヤドノ サビシキニ",
+    "shimo": "ヒトコソミエネ アキワキニケリ",
+    "kimariji_len": 2,
+    "kimariji": "ヤエ"
+  },
+  {
+    "id": "048",
+    "type": "poem",
+    "kami_kana": "カゼオイタミ イワウツナミノ オノレノミ",
+    "shimo_kana": "クダケテモノオ オモーコロカナ",
+    "kami": "カゼオイタミ イワウツナミノ オノレノミ",
+    "shimo": "クダケテモノオ オモーコロカナ",
+    "kimariji_len": 3,
+    "kimariji": "カゼオ"
+  },
+  {
+    "id": "049",
+    "type": "poem",
+    "kami_kana": "ミカキモリ エジノタクヒノ ヨルワモエ",
+    "shimo_kana": "ヒルワキエツツ モノオコソオモエ",
+    "kami": "ミカキモリ エジノタクヒノ ヨルワモエ",
+    "shimo": "ヒルワキエツツ モノオコソオモエ",
+    "kimariji_len": 3,
+    "kimariji": "ミカキ"
+  },
+  {
+    "id": "050",
+    "type": "poem",
+    "kami_kana": "キミガタメ オシカラザリシ イノチサエ",
+    "shimo_kana": "ナガクモガナト オモイケルカナ",
+    "kami": "キミガタメ オシカラザリシ イノチサエ",
+    "shimo": "ナガクモガナト オモイケルカナ",
+    "kimariji_len": 6,
+    "kimariji": "キミガタメオ"
+  },
+  {
+    "id": "051",
+    "type": "poem",
+    "kami_kana": "カクトダニ エヤワイブキノ サシモグサ",
+    "shimo_kana": "サシモシラジナ モユルオモイオ",
+    "kami": "カクトダニ エヤワイブキノ サシモグサ",
+    "shimo": "サシモシラジナ モユルオモイオ",
+    "kimariji_len": 2,
+    "kimariji": "カク"
+  },
+  {
+    "id": "052",
+    "type": "poem",
+    "kami_kana": "アケヌレバ クルルモノトワ シリナガラ",
+    "shimo_kana": "ナオウラメシキ アサボラケカナ",
+    "kami": "アケヌレバ クルルモノトワ シリナガラ",
+    "shimo": "ナオウラメシキ アサボラケカナ",
+    "kimariji_len": 2,
+    "kimariji": "アケ"
+  },
+  {
+    "id": "053",
+    "type": "poem",
+    "kami_kana": "ナゲキツツ ヒトリヌルヨノ アクルマワ",
+    "shimo_kana": "イカニヒサシキ モノトカワシル",
+    "kami": "ナゲキツツ ヒトリヌルヨノ アクルマワ",
+    "shimo": "イカニヒサシキ モノトカワシル",
+    "kimariji_len": 3,
+    "kimariji": "ナゲキ"
+  },
+  {
+    "id": "054",
+    "type": "poem",
+    "kami_kana": "ワスレジノ ユクスエマデワ カタケレバ",
+    "shimo_kana": "キョーオカギリノ イノチトモガナ",
+    "kami": "ワスレジノ ユクスエマデワ カタケレバ",
+    "shimo": "キョーオカギリノ イノチトモガナ",
+    "kimariji_len": 3,
+    "kimariji": "ワスレ"
+  },
+  {
+    "id": "055",
+    "type": "poem",
+    "kami_kana": "タキノオトワ タエテヒサシク ナリヌレド",
+    "shimo_kana": "ナコソナガレテ ナオキコエケレ",
+    "kami": "タキノオトワ タエテヒサシク ナリヌレド",
+    "shimo": "ナコソナガレテ ナオキコエケレ",
+    "kimariji_len": 2,
+    "kimariji": "タキ"
+  },
+  {
+    "id": "056",
+    "type": "poem",
+    "kami_kana": "アラザラン コノヨノホカノ オモイデニ",
+    "shimo_kana": "イマヒトタビノ オーコトモガナ",
+    "kami": "アラザラン コノヨノホカノ オモイデニ",
+    "shimo": "イマヒトタビノ オーコトモガナ",
+    "kimariji_len": 3,
+    "kimariji": "アラザ"
+  },
+  {
+    "id": "057",
+    "type": "poem",
+    "kami_kana": "メグリアイテ ミシヤソレトモ ワカヌマニ",
+    "shimo_kana": "クモガクレニシ ヨワノツキカナ",
+    "kami": "メグリアイテ ミシヤソレトモ ワカヌマニ",
+    "shimo": "クモガクレニシ ヨワノツキカナ",
+    "kimariji_len": 1,
+    "kimariji": "メ"
+  },
+  {
+    "id": "058",
+    "type": "poem",
+    "kami_kana": "アリマヤマ イナノササハラ カゼフケバ",
+    "shimo_kana": "イデソヨヒトオ ワスレヤワスル",
+    "kami": "アリマヤマ イナノササハラ カゼフケバ",
+    "shimo": "イデソヨヒトオ ワスレヤワスル",
+    "kimariji_len": 3,
+    "kimariji": "アリマ"
+  },
+  {
+    "id": "059",
+    "type": "poem",
+    "kami_kana": "ヤスラワデ ネナマシモノオ サヨフケテ",
+    "shimo_kana": "カタブクマデノ ツキオミシカナ",
+    "kami": "ヤスラワデ ネナマシモノオ サヨフケテ",
+    "shimo": "カタブクマデノ ツキオミシカナ",
+    "kimariji_len": 2,
+    "kimariji": "ヤス"
+  },
+  {
+    "id": "060",
+    "type": "poem",
+    "kami_kana": "オーエヤマ イクノノミチノ トーケレバ",
+    "shimo_kana": "マダフミモミズ アマノハシダテ",
+    "kami": "オーエヤマ イクノノミチノ トーケレバ",
+    "shimo": "マダフミモミズ アマノハシダテ",
+    "kimariji_len": 3,
+    "kimariji": "オーエ"
+  },
+  {
+    "id": "061",
+    "type": "poem",
+    "kami_kana": "イニシエノ ナラノミヤコノ ヤエザクラ",
+    "shimo_kana": "キョーココノエニ ニオイヌルカナ",
+    "kami": "イニシエノ ナラノミヤコノ ヤエザクラ",
+    "shimo": "キョーココノエニ ニオイヌルカナ",
+    "kimariji_len": 2,
+    "kimariji": "イニ"
+  },
+  {
+    "id": "062",
+    "type": "poem",
+    "kami_kana": "ヨオコメテ トリノソラネワ ハカルトモ",
+    "shimo_kana": "ヨニオーサカノ セキワユルサジ",
+    "kami": "ヨオコメテ トリノソラネワ ハカルトモ",
+    "shimo": "ヨニオーサカノ セキワユルサジ",
+    "kimariji_len": 2,
+    "kimariji": "ヨオ"
+  },
+  {
+    "id": "063",
+    "type": "poem",
+    "kami_kana": "イマワタダ オモイタエナン トバカリオ",
+    "shimo_kana": "ヒトズテナラデ ユーヨシモガナ",
+    "kami": "イマワタダ オモイタエナン トバカリオ",
+    "shimo": "ヒトズテナラデ ユーヨシモガナ",
+    "kimariji_len": 3,
+    "kimariji": "イマワ"
+  },
+  {
+    "id": "064",
+    "type": "poem",
+    "kami_kana": "アサボラケ ウジノカワギリ タエダエニ",
+    "shimo_kana": "アラワレワタル セゼノアジロギ",
+    "kami": "アサボラケ ウジノカワギリ タエダエニ",
+    "shimo": "アラワレワタル セゼノアジロギ",
+    "kimariji_len": 6,
+    "kimariji": "アサボラケウ"
+  },
+  {
+    "id": "065",
+    "type": "poem",
+    "kami_kana": "ウラミワビ ホサヌソデダニ アルモノオ",
+    "shimo_kana": "コイニクチナン ナコソオシケレ",
+    "kami": "ウラミワビ ホサヌソデダニ アルモノオ",
+    "shimo": "コイニクチナン ナコソオシケレ",
+    "kimariji_len": 2,
+    "kimariji": "ウラ"
+  },
+  {
+    "id": "066",
+    "type": "poem",
+    "kami_kana": "モロトモニ アワレトオモエ ヤマザクラ",
+    "shimo_kana": "ハナヨリホカニ シルヒトモナシ",
+    "kami": "モロトモニ アワレトオモエ ヤマザクラ",
+    "shimo": "ハナヨリホカニ シルヒトモナシ",
+    "kimariji_len": 2,
+    "kimariji": "モロ"
+  },
+  {
+    "id": "067",
+    "type": "poem",
+    "kami_kana": "ハルノヨノ ユメバカリナル タマクラニ",
+    "shimo_kana": "カイナクタタン ナコソオシケレ",
+    "kami": "ハルノヨノ ユメバカリナル タマクラニ",
+    "shimo": "カイナクタタン ナコソオシケレ",
+    "kimariji_len": 3,
+    "kimariji": "ハルノ"
+  },
+  {
+    "id": "068",
+    "type": "poem",
+    "kami_kana": "ココロニモ アラデウキヨニ ナガラエバ",
+    "shimo_kana": "コイシカルベキ ヨワノツキカナ",
+    "kami": "ココロニモ アラデウキヨニ ナガラエバ",
+    "shimo": "コイシカルベキ ヨワノツキカナ",
+    "kimariji_len": 4,
+    "kimariji": "ココロニ"
+  },
+  {
+    "id": "069",
+    "type": "poem",
+    "kami_kana": "アラシフク ミムロノヤマノ モミジバワ",
+    "shimo_kana": "タツタノカワノ ニシキナリケリ",
+    "kami": "アラシフク ミムロノヤマノ モミジバワ",
+    "shimo": "タツタノカワノ ニシキナリケリ",
+    "kimariji_len": 3,
+    "kimariji": "アラシ"
+  },
+  {
+    "id": "070",
+    "type": "poem",
+    "kami_kana": "サビシサニ ヤドオタチイデテ ナガムレバ",
+    "shimo_kana": "イズクモオナジ アキノユーグレ",
+    "kami": "サビシサニ ヤドオタチイデテ ナガムレバ",
+    "shimo": "イズクモオナジ アキノユーグレ",
+    "kimariji_len": 1,
+    "kimariji": "サ"
+  },
+  {
+    "id": "071",
+    "type": "poem",
+    "kami_kana": "ユーサレバ カドタノイナバ オトズレテ",
+    "shimo_kana": "アシノマロヤニ アキカゼゾフク",
+    "kami": "ユーサレバ カドタノイナバ オトズレテ",
+    "shimo": "アシノマロヤニ アキカゼゾフク",
+    "kimariji_len": 2,
+    "kimariji": "ユー"
+  },
+  {
+    "id": "072",
+    "type": "poem",
+    "kami_kana": "オトニキク タカシノハマノ アダナミワ",
+    "shimo_kana": "カケジヤソデノ ヌレモコソスレ",
+    "kami": "オトニキク タカシノハマノ アダナミワ",
+    "shimo": "カケジヤソデノ ヌレモコソスレ",
+    "kimariji_len": 2,
+    "kimariji": "オト"
+  },
+  {
+    "id": "073",
+    "type": "poem",
+    "kami_kana": "タカサゴノ オノエノサクラ サキニケリ",
+    "shimo_kana": "トヤマノカスミ タタズモアラナン",
+    "kami": "タカサゴノ オノエノサクラ サキニケリ",
+    "shimo": "トヤマノカスミ タタズモアラナン",
+    "kimariji_len": 2,
+    "kimariji": "タカ"
+  },
+  {
+    "id": "074",
+    "type": "poem",
+    "kami_kana": "ウカリケル ヒトオハツセノ ヤマオロシヨ",
+    "shimo_kana": "ハゲシカレトワ イノラヌモノオ",
+    "kami": "ウカリケル ヒトオハツセノ ヤマオロシヨ",
+    "shimo": "ハゲシカレトワ イノラヌモノオ",
+    "kimariji_len": 2,
+    "kimariji": "ウカ"
+  },
+  {
+    "id": "075",
+    "type": "poem",
+    "kami_kana": "チギリオキシ サセモガツユオ イノチニテ",
+    "shimo_kana": "アワレコトシノ アキモイヌメリ",
+    "kami": "チギリオキシ サセモガツユオ イノチニテ",
+    "shimo": "アワレコトシノ アキモイヌメリ",
+    "kimariji_len": 4,
+    "kimariji": "チギリオ"
+  },
+  {
+    "id": "076",
+    "type": "poem",
+    "kami_kana": "ワタノハラ コギイデテミレバ ヒサカタノ",
+    "shimo_kana": "クモイニマゴー オキツシラナミ",
+    "kami": "ワタノハラ コギイデテミレバ ヒサカタノ",
+    "shimo": "クモイニマゴー オキツシラナミ",
+    "kimariji_len": 6,
+    "kimariji": "ワタノハラコ"
+  },
+  {
+    "id": "077",
+    "type": "poem",
+    "kami_kana": "セオハヤミ イワニセカルル タキガワノ",
+    "shimo_kana": "ワレテモスエニ アワントゾオモー",
+    "kami": "セオハヤミ イワニセカルル タキガワノ",
+    "shimo": "ワレテモスエニ アワントゾオモー",
+    "kimariji_len": 1,
+    "kimariji": "セ"
+  },
+  {
+    "id": "078",
+    "type": "poem",
+    "kami_kana": "アワジシマ カヨーチドリノ ナクコエニ",
+    "shimo_kana": "イクヨネザメヌ スマノセキモリ",
+    "kami": "アワジシマ カヨーチドリノ ナクコエニ",
+    "shimo": "イクヨネザメヌ スマノセキモリ",
+    "kimariji_len": 3,
+    "kimariji": "アワジ"
+  },
+  {
+    "id": "079",
+    "type": "poem",
+    "kami_kana": "アキカゼニ タナビククモノ タエマヨリ",
+    "shimo_kana": "モレイズルツキノ カゲノサヤケサ",
+    "kami": "アキカゼニ タナビククモノ タエマヨリ",
+    "shimo": "モレイズルツキノ カゲノサヤケサ",
+    "kimariji_len": 3,
+    "kimariji": "アキカ"
+  },
+  {
+    "id": "080",
+    "type": "poem",
+    "kami_kana": "ナガカラン ココロモシラズ クロカミノ",
+    "shimo_kana": "ミダレテケサワ モノオコソオモエ",
+    "kami": "ナガカラン ココロモシラズ クロカミノ",
+    "shimo": "ミダレテケサワ モノオコソオモエ",
+    "kimariji_len": 3,
+    "kimariji": "ナガカ"
+  },
+  {
+    "id": "081",
+    "type": "poem",
+    "kami_kana": "ホトトギス ナキツルカタオ ナガムレバ",
+    "shimo_kana": "タダアリアケノ ツキゾノコレル",
+    "kami": "ホトトギス ナキツルカタオ ナガムレバ",
+    "shimo": "タダアリアケノ ツキゾノコレル",
+    "kimariji_len": 1,
+    "kimariji": "ホ"
+  },
+  {
+    "id": "082",
+    "type": "poem",
+    "kami_kana": "オモイワビ サテモイノチワ アルモノオ",
+    "shimo_kana": "ウキニタエヌハ ナミダナリケリ",
+    "kami": "オモイワビ サテモイノチワ アルモノオ",
+    "shimo": "ウキニタエヌハ ナミダナリケリ",
+    "kimariji_len": 2,
+    "kimariji": "オモ"
+  },
+  {
+    "id": "083",
+    "type": "poem",
+    "kami_kana": "ヨノナカヨ ミチコソナケレ オモイイル",
+    "shimo_kana": "ヤマノオクニモ シカゾナクナル",
+    "kami": "ヨノナカヨ ミチコソナケレ オモイイル",
+    "shimo": "ヤマノオクニモ シカゾナクナル",
+    "kimariji_len": 5,
+    "kimariji": "ヨノナカヨ"
+  },
+  {
+    "id": "084",
+    "type": "poem",
+    "kami_kana": "ナガラエバ マタコノゴロヤ シノバレン",
+    "shimo_kana": "ウシトミシヨゾ イマワコイシキ",
+    "kami": "ナガラエバ マタコノゴロヤ シノバレン",
+    "shimo": "ウシトミシヨゾ イマワコイシキ",
+    "kimariji_len": 3,
+    "kimariji": "ナガラ"
+  },
+  {
+    "id": "085",
+    "type": "poem",
+    "kami_kana": "ヨモスガラ モノオモーコロワ アケヤラヌ",
+    "shimo_kana": "ネヤノヒマサエ ツレナカリケリ",
+    "kami": "ヨモスガラ モノオモーコロワ アケヤラヌ",
+    "shimo": "ネヤノヒマサエ ツレナカリケリ",
+    "kimariji_len": 2,
+    "kimariji": "ヨモ"
+  },
+  {
+    "id": "086",
+    "type": "poem",
+    "kami_kana": "ナゲケトテ ツキヤワモノオ オモワスル",
+    "shimo_kana": "カコチガオナル ワガナミダカナ",
+    "kami": "ナゲケトテ ツキヤワモノオ オモワスル",
+    "shimo": "カコチガオナル ワガナミダカナ",
+    "kimariji_len": 3,
+    "kimariji": "ナゲケ"
+  },
+  {
+    "id": "087",
+    "type": "poem",
+    "kami_kana": "ムラサメノ ツユモマダヒヌ マキノハニ",
+    "shimo_kana": "キリタチノボル アキノユーグレ",
+    "kami": "ムラサメノ ツユモマダヒヌ マキノハニ",
+    "shimo": "キリタチノボル アキノユーグレ",
+    "kimariji_len": 1,
+    "kimariji": "ム"
+  },
+  {
+    "id": "088",
+    "type": "poem",
+    "kami_kana": "ナニワエノ アシノカリネノ ヒトヨユエ",
+    "shimo_kana": "ミオツクシテヤ コイワタルベキ",
+    "kami": "ナニワエノ アシノカリネノ ヒトヨユエ",
+    "shimo": "ミオツクシテヤ コイワタルベキ",
+    "kimariji_len": 4,
+    "kimariji": "ナニワエ"
+  },
+  {
+    "id": "089",
+    "type": "poem",
+    "kami_kana": "タマノオヨ タエナバタエネ ナガラエバ",
+    "shimo_kana": "シノブルコトノ ヨワリモゾスル",
+    "kami": "タマノオヨ タエナバタエネ ナガラエバ",
+    "shimo": "シノブルコトノ ヨワリモゾスル",
+    "kimariji_len": 2,
+    "kimariji": "タマ"
+  },
+  {
+    "id": "090",
+    "type": "poem",
+    "kami_kana": "ミセバヤナ オジマノアマノ ソデダニモ",
+    "shimo_kana": "ヌレニゾヌレシ イロワカワラズ",
+    "kami": "ミセバヤナ オジマノアマノ ソデダニモ",
+    "shimo": "ヌレニゾヌレシ イロワカワラズ",
+    "kimariji_len": 2,
+    "kimariji": "ミセ"
+  },
+  {
+    "id": "091",
+    "type": "poem",
+    "kami_kana": "キリギリス ナクヤシモヨノ サムシロニ",
+    "shimo_kana": "コロモカタシキ ヒトリカモネン",
+    "kami": "キリギリス ナクヤシモヨノ サムシロニ",
+    "shimo": "コロモカタシキ ヒトリカモネン",
+    "kimariji_len": 2,
+    "kimariji": "キリ"
+  },
+  {
+    "id": "092",
+    "type": "poem",
+    "kami_kana": "ワガソデワ シオヒニミエヌ オキノイシノ",
+    "shimo_kana": "ヒトコソシラネ カワクマモナシ",
+    "kami": "ワガソデワ シオヒニミエヌ オキノイシノ",
+    "shimo": "ヒトコソシラネ カワクマモナシ",
+    "kimariji_len": 3,
+    "kimariji": "ワガソ"
+  },
+  {
+    "id": "093",
+    "type": "poem",
+    "kami_kana": "ヨノナカワ ツネニモガモナ ナギサコグ",
+    "shimo_kana": "アマノオブネノ ツナデカナシモ",
+    "kami": "ヨノナカワ ツネニモガモナ ナギサコグ",
+    "shimo": "アマノオブネノ ツナデカナシモ",
+    "kimariji_len": 5,
+    "kimariji": "ヨノナカワ"
+  },
+  {
+    "id": "094",
+    "type": "poem",
+    "kami_kana": "ミヨシノノ ヤマノアキカゼ サヨフケテ",
+    "shimo_kana": "フルサトサムク コロモウツナリ",
+    "kami": "ミヨシノノ ヤマノアキカゼ サヨフケテ",
+    "shimo": "フルサトサムク コロモウツナリ",
+    "kimariji_len": 2,
+    "kimariji": "ミヨ"
+  },
+  {
+    "id": "095",
+    "type": "poem",
+    "kami_kana": "オオケナク ウキヨノタミニ オオーカナ",
+    "shimo_kana": "ワガタツソマニ スミゾメノソデ",
+    "kami": "オオケナク ウキヨノタミニ オオーカナ",
+    "shimo": "ワガタツソマニ スミゾメノソデ",
+    "kimariji_len": 2,
+    "kimariji": "オオ"
+  },
+  {
+    "id": "096",
+    "type": "poem",
+    "kami_kana": "ハナサソー アラシノニワノ ユキナラデ",
+    "shimo_kana": "フリユクモノワ ワガミナリケリ",
+    "kami": "ハナサソー アラシノニワノ ユキナラデ",
+    "shimo": "フリユクモノワ ワガミナリケリ",
+    "kimariji_len": 3,
+    "kimariji": "ハナサ"
+  },
+  {
+    "id": "097",
+    "type": "poem",
+    "kami_kana": "コヌヒトオ マツオノウラノ ユーナギニ",
+    "shimo_kana": "ヤクヤモシオノ ミモコガレツツ",
+    "kami": "コヌヒトオ マツオノウラノ ユーナギニ",
+    "shimo": "ヤクヤモシオノ ミモコガレツツ",
+    "kimariji_len": 2,
+    "kimariji": "コヌ"
+  },
+  {
+    "id": "098",
+    "type": "poem",
+    "kami_kana": "カゼソヨグ ナラノオガワノ ユーグレワ",
+    "shimo_kana": "ミソギゾナツノ シルシナリケル",
+    "kami": "カゼソヨグ ナラノオガワノ ユーグレワ",
+    "shimo": "ミソギゾナツノ シルシナリケル",
+    "kimariji_len": 3,
+    "kimariji": "カゼソ"
+  },
+  {
+    "id": "099",
+    "type": "poem",
+    "kami_kana": "ヒトモオシ ヒトモウラメシ アジキナク",
+    "shimo_kana": "ヨオオモーユエニ モノオモーミワ",
+    "kami": "ヒトモオシ ヒトモウラメシ アジキナク",
+    "shimo": "ヨオオモーユエニ モノオモーミワ",
+    "kimariji_len": 3,
+    "kimariji": "ヒトモ"
+  },
+  {
+    "id": "100",
+    "type": "poem",
+    "kami_kana": "モモシキヤ フルキノキバノ シノブニモ",
+    "shimo_kana": "ナオアマリアル ムカシナリケリ",
+    "kami": "モモシキヤ フルキノキバノ シノブニモ",
+    "shimo": "ナオアマリアル ムカシナリケリ",
+    "kimariji_len": 2,
+    "kimariji": "モモ"
+  }
+]
