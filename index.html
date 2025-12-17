@@ -37,6 +37,18 @@
           <option value="tts">tts</option>
         </select>
       </div>
+      <div class="control-row">
+        <label for="reciteMode">読みモード:</label>
+        <select id="reciteMode">
+          <option value="normal">通常</option>
+          <option value="reciter">読み手風（上の句→溜め→下の句）</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="reciteGapMs">溜め時間(ms):</label>
+        <input type="range" id="reciteGapMs" min="800" max="1600" step="400" />
+        <span class="range-value" id="reciteGapLabel"></span>
+      </div>
       <div class="control-row tts-row">
         <label for="ttsRate">rate</label>
         <input type="range" id="ttsRate" min="0.85" max="1.1" step="0.01" />

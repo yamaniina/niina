@@ -9,6 +9,9 @@ const elements = {
   skipJoka: document.getElementById("skipJoka"),
   shuffleToggle: document.getElementById("shuffleToggle"),
   audioMode: document.getElementById("audioMode"),
+  reciteMode: document.getElementById("reciteMode"),
+  reciteGapMs: document.getElementById("reciteGapMs"),
+  reciteGapLabel: document.getElementById("reciteGapLabel"),
   ttsRate: document.getElementById("ttsRate"),
   ttsPitch: document.getElementById("ttsPitch"),
   ttsVoice: document.getElementById("ttsVoice"),
@@ -37,12 +40,15 @@ let currentTtsCleanup = null;
 let currentUtterance = null;
 let voices = [];
 let speechPrimed = false;
+let ttsRunId = 0;
 
 function loadSettings() {
   const practiceMode = localStorage.getItem("practiceMode") || "all";
   const skipJoka = localStorage.getItem("skipJoka") === "true";
   const shuffleEnabled = localStorage.getItem("shuffleEnabled") === "true";
   const audioMode = localStorage.getItem("audioMode") || "audio";
+  const reciteMode = localStorage.getItem("reciteMode") || "normal";
+  const reciteGapMs = Number(localStorage.getItem("reciteGapMs")) || 1200;
   const ttsRate = Number(localStorage.getItem("ttsRate")) || 1;
   const ttsPitch = Number(localStorage.getItem("ttsPitch")) || 1;
   const ttsVoice = localStorage.getItem("ttsVoice") || "";
@@ -51,6 +57,8 @@ function loadSettings() {
   elements.skipJoka.checked = skipJoka;
   elements.shuffleToggle.checked = shuffleEnabled;
   elements.audioMode.value = audioMode;
+  elements.reciteMode.value = reciteMode;
+  elements.reciteGapMs.value = reciteGapMs;
   elements.ttsRate.value = ttsRate;
   elements.ttsPitch.value = ttsPitch;
   elements.ttsVoice.setAttribute("data-saved", ttsVoice);
@@ -62,6 +70,10 @@ function saveSetting(key, value) {
 
 function updateStatus(text) {
   elements.status.textContent = text;
+}
+
+function updateReciteGapLabel() {
+  elements.reciteGapLabel.textContent = `${elements.reciteGapMs.value}ms`;
 }
 
 function updateDisplay(poem) {
@@ -225,9 +237,28 @@ function buildTtsText(poem) {
   if (poem.type === "joka") {
     return poem.text || "";
   }
+  if (elements.reciteMode.value === "reciter") {
+    return buildReciterPoemText(poem);
+  }
+  return buildNormalPoemText(poem);
+}
+
+function buildNormalPoemText(poem) {
   const kami = (poem.kami || "").replace(/\s+/g, "、");
   const shimo = (poem.shimo || "").replace(/\s+/g, "、");
   return `${kami}……${shimo}`;
+}
+
+function buildReciterPoemText(poem) {
+  const kami = `${(poem.kami || "").replace(/\s+/g, "、")}。`;
+  const shimo = `${(poem.shimo || "").replace(/\s+/g, "、")}。`;
+  return `${kami}\n\n…………\n\n${shimo}`;
+}
+
+function buildReciterPoemSegments(poem) {
+  const kami = `${(poem.kami || "").replace(/\s+/g, "、")}。`;
+  const shimo = `${(poem.shimo || "").replace(/\s+/g, "、")}。`;
+  return { kamiText: kami, shimoText: shimo };
 }
 
 function playViaTts(poem) {
@@ -239,50 +270,98 @@ function playViaTts(poem) {
     }
 
     cancelPlayback();
-    const utterance = new SpeechSynthesisUtterance(buildTtsText(poem));
-    currentUtterance = utterance;
-    utterance.rate = Number(elements.ttsRate.value) || 1;
-    utterance.pitch = Number(elements.ttsPitch.value) || 1;
-    const selectedVoiceUri = elements.ttsVoice.value;
-    if (selectedVoiceUri) {
-      const voice = voices.find((v) => v.voiceURI === selectedVoiceUri || v.name === selectedVoiceUri);
-      if (voice) utterance.voice = voice;
-    }
-
+    const runId = ++ttsRunId;
     let finished = false;
+    let gapTimer = null;
+
+    const cleanup = () => {
+      if (gapTimer) clearTimeout(gapTimer);
+      speechSynthesis.cancel();
+      currentUtterance = null;
+      currentTtsCleanup = null;
+    };
+
     const safeResolve = () => {
       if (finished) return;
       finished = true;
+      cleanup();
       resolve();
     };
     const safeReject = () => {
       if (finished) return;
       finished = true;
+      cleanup();
       reject();
     };
 
-    const handleEnd = () => {
-      currentTtsCleanup?.();
-      currentTtsCleanup = null;
-      safeResolve();
+    const createUtterance = (text) => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      currentUtterance = utterance;
+      utterance.rate = Number(elements.ttsRate.value) || 1;
+      utterance.pitch = Number(elements.ttsPitch.value) || 1;
+      const selectedVoiceUri = elements.ttsVoice.value;
+      if (selectedVoiceUri) {
+        const voice = voices.find((v) => v.voiceURI === selectedVoiceUri || v.name === selectedVoiceUri);
+        if (voice) utterance.voice = voice;
+      }
+      return utterance;
     };
-    const handleError = () => {
-      currentTtsCleanup?.();
-      currentTtsCleanup = null;
-      safeReject();
-    };
+
+    const speakSegment = (text) =>
+      new Promise((segmentResolve, segmentReject) => {
+        const utterance = createUtterance(text);
+        const clearHandlers = () => {
+          utterance.onend = null;
+          utterance.onerror = null;
+        };
+        utterance.onend = () => {
+          if (runId !== ttsRunId) return;
+          clearHandlers();
+          segmentResolve();
+        };
+        utterance.onerror = () => {
+          if (runId !== ttsRunId) return;
+          clearHandlers();
+          segmentReject();
+        };
+        speechSynthesis.speak(utterance);
+      });
+
+    const waitGap = (duration) =>
+      new Promise((gapResolve) => {
+        gapTimer = setTimeout(() => {
+          if (runId !== ttsRunId) return;
+          gapResolve();
+        }, duration);
+      });
 
     currentTtsCleanup = () => {
-      utterance.onend = null;
-      utterance.onerror = null;
-      speechSynthesis.cancel();
-      currentUtterance = null;
+      if (runId === ttsRunId) {
+        ttsRunId += 1;
+      }
       safeResolve();
     };
 
-    utterance.onend = handleEnd;
-    utterance.onerror = handleError;
-    speechSynthesis.speak(utterance);
+    (async () => {
+      try {
+        if (poem.type === "poem" && elements.reciteMode.value === "reciter") {
+          const { kamiText, shimoText } = buildReciterPoemSegments(poem);
+          await speakSegment(kamiText);
+          if (runId !== ttsRunId) return;
+          await waitGap(Number(elements.reciteGapMs.value) || 1200);
+          if (runId !== ttsRunId) return;
+          await speakSegment(shimoText);
+        } else {
+          const text = buildTtsText(poem);
+          await speakSegment(text);
+        }
+      } catch (err) {
+        console.error(err);
+        safeReject();
+        return;
+      }
+      safeResolve();
+    })();
   });
 }
 
@@ -405,6 +484,13 @@ function attachEventListeners() {
   elements.audioMode.addEventListener("change", () => {
     saveSetting("audioMode", elements.audioMode.value);
   });
+  elements.reciteMode.addEventListener("change", () => {
+    saveSetting("reciteMode", elements.reciteMode.value);
+  });
+  elements.reciteGapMs.addEventListener("input", () => {
+    saveSetting("reciteGapMs", elements.reciteGapMs.value);
+    updateReciteGapLabel();
+  });
   elements.ttsRate.addEventListener("input", () => {
     saveSetting("ttsRate", elements.ttsRate.value);
   });
@@ -424,6 +510,7 @@ function attachEventListeners() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadSettings();
+  updateReciteGapLabel();
   attachEventListeners();
   populateVoices();
   if ("speechSynthesis" in window) {
