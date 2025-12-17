@@ -3,6 +3,14 @@ import re
 from pathlib import Path
 
 RAW_PATH = Path('raw_data.txt')
+POEMS_JSON_PATH = Path('poems.json')
+
+# Hard-coded overrides for newly published audio files. These take precedence over
+# anything already present in poems.json so freshly added URLs are retained even
+# after regeneration.
+AUDIO_OVERRIDES = {
+    "022": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCcqSSnYpz6QbFCiAZkwCdeAXrT20uPTiAEc8m4K_PIS20?e=QEJsFu",
+}
 
 
 def parse_lines(raw_text):
@@ -57,6 +65,21 @@ def build_records(poems):
     return records
 
 
+def load_existing_audio_map(path: Path):
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding='utf-8'))
+    except Exception:
+        return {}
+    mapping = {}
+    for item in data:
+        audio = item.get('audio') or item.get('audio_url') or item.get('audioUrl')
+        if audio:
+            mapping[item.get('id')] = audio
+    return mapping
+
+
 def write_tsv(path, records):
     header = ['id', 'kimariji_len', 'kimariji', 'kami_kana', 'shimo_kana']
     lines = ['\t'.join(header)]
@@ -71,7 +94,7 @@ def write_tsv(path, records):
     path.write_text('\n'.join(lines), encoding='utf-8')
 
 
-def write_poems_json(path, records):
+def write_poems_json(path, records, audio_map):
     data = [
         {
             'id': 'JYO',
@@ -82,6 +105,7 @@ def write_poems_json(path, records):
         }
     ]
     for r in records:
+        audio = audio_map.get(r['id'])
         data.append({
             'id': r['id'],
             'type': 'poem',
@@ -91,6 +115,7 @@ def write_poems_json(path, records):
             'shimo': r['shimo_kana'],
             'kimariji_len': r['kimariji_len'],
             'kimariji': r['kimariji'],
+            **({'audio': audio} if audio else {}),
         })
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
 
@@ -103,8 +128,10 @@ def main():
             print(f"Warning: line {line_no} has fewer than 5 tokens: {content}")
     compute_kimariji(poems)
     records = build_records(poems)
+    existing_audio = load_existing_audio_map(POEMS_JSON_PATH)
+    existing_audio.update(AUDIO_OVERRIDES)
     write_tsv(Path('output.tsv'), records)
-    write_poems_json(Path('poems.json'), records)
+    write_poems_json(Path('poems.json'), records, existing_audio)
     print(f"Processed {len(records)} poems")
 
 
