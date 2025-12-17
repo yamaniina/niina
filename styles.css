@@ -132,29 +132,6 @@ button:active {
   font-size: 0.9rem;
 }
 
-.sso-block {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-
-.sso-block h3 {
-  margin: 0 0 8px;
-}
-
-.sso-row {
-  align-items: center;
-}
-
-.sso-status {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.sso-status.active {
-  color: #7cedff;
-}
-
 .playback-panel h2 {
   margin-top: 0;
   margin-bottom: 12px;

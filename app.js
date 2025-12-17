@@ -15,14 +15,8 @@ const elements = {
   ttsRate: document.getElementById("ttsRate"),
   ttsPitch: document.getElementById("ttsPitch"),
   ttsVoice: document.getElementById("ttsVoice"),
-   resetButton: document.getElementById("resetButton"),
-   poemSelect: document.getElementById("poemSelect"),
-   ssoClientId: document.getElementById("ssoClientId"),
-   ssoTenantId: document.getElementById("ssoTenantId"),
-   ssoScope: document.getElementById("ssoScope"),
-   ssoLogin: document.getElementById("ssoLogin"),
-   ssoLogout: document.getElementById("ssoLogout"),
-   ssoStatus: document.getElementById("ssoStatus"),
+  resetButton: document.getElementById("resetButton"),
+  poemSelect: document.getElementById("poemSelect"),
   nextButton: document.getElementById("nextButton"),
   startButton: document.getElementById("startButton"),
   status: document.getElementById("status"),
@@ -43,15 +37,12 @@ let status = STATUS.IDLE;
 let hasPlayedJoka = false;
 const WAIT_DURATION = 2000;
 let audioElement = null;
-let audioObjectUrl = null;
 let currentAudioCleanup = null;
 let currentTtsCleanup = null;
 let currentUtterance = null;
 let voices = [];
 let speechPrimed = false;
 let ttsRunId = 0;
-let msalClient = null;
-let msalAccount = null;
 
 function loadSettings() {
   const practiceMode = localStorage.getItem("practiceMode") || "all";
@@ -63,9 +54,6 @@ function loadSettings() {
   const ttsRate = Number(localStorage.getItem("ttsRate")) || 1;
   const ttsPitch = Number(localStorage.getItem("ttsPitch")) || 1;
   const ttsVoice = localStorage.getItem("ttsVoice") || "";
-  const ssoClientId = localStorage.getItem("ssoClientId") || "";
-  const ssoTenantId = localStorage.getItem("ssoTenantId") || "";
-  const ssoScope = localStorage.getItem("ssoScope") || "";
   const selectedPoemId = localStorage.getItem("selectedPoemId") || "";
 
   elements.practiceMode.value = practiceMode;
@@ -77,103 +65,11 @@ function loadSettings() {
   elements.ttsRate.value = ttsRate;
   elements.ttsPitch.value = ttsPitch;
   elements.ttsVoice.setAttribute("data-saved", ttsVoice);
-  elements.ssoClientId.value = ssoClientId;
-  elements.ssoTenantId.value = ssoTenantId;
-  elements.ssoScope.value = ssoScope;
   elements.poemSelect.setAttribute("data-saved", selectedPoemId);
 }
 
 function saveSetting(key, value) {
   localStorage.setItem(key, value);
-}
-
-function updateSsoStatus(text, accent = false) {
-  if (elements.ssoStatus) {
-    elements.ssoStatus.textContent = text;
-    elements.ssoStatus.classList.toggle("active", accent);
-  }
-}
-
-function buildMsalInstance() {
-  const clientId = elements.ssoClientId.value.trim();
-  const tenant = elements.ssoTenantId.value.trim() || "organizations";
-  if (!clientId || !window.msal) return null;
-  return new msal.PublicClientApplication({
-    auth: {
-      clientId,
-      authority: `https://login.microsoftonline.com/${tenant}`,
-    },
-    cache: { cacheLocation: "localStorage" },
-  });
-}
-
-function initMsalClient() {
-  msalClient = buildMsalInstance();
-  if (!msalClient) {
-    updateSsoStatus("未設定");
-    return;
-  }
-  const accounts = msalClient.getAllAccounts();
-  if (accounts.length > 0) {
-    msalAccount = accounts[0];
-    msalClient.setActiveAccount(msalAccount);
-    updateSsoStatus(`サインイン中: ${msalAccount.username}`, true);
-  } else {
-    msalAccount = null;
-    updateSsoStatus("未サインイン");
-  }
-}
-
-async function getAccessToken() {
-  if (!msalClient) throw new Error("MSAL未初期化");
-  const scope = elements.ssoScope.value.trim();
-  const scopes = scope ? [scope] : ["User.Read"];
-  const request = { scopes };
-  if (msalAccount) {
-    request.account = msalAccount;
-  }
-  try {
-    const result = await msalClient.acquireTokenSilent(request);
-    if (result) return result.accessToken;
-  } catch (err) {
-    // Fallback to popup
-  }
-  const result = await msalClient.acquireTokenPopup(request);
-  if (result && result.account) {
-    msalAccount = result.account;
-    msalClient.setActiveAccount(msalAccount);
-    updateSsoStatus(`サインイン中: ${msalAccount.username}`, true);
-  }
-  return result.accessToken;
-}
-
-async function handleSsoLogin() {
-  initMsalClient();
-  if (!msalClient) {
-    updateSsoStatus("MSALが読み込まれていません");
-    return;
-  }
-  try {
-    await getAccessToken();
-    updateSsoStatus(`サインイン中: ${msalAccount?.username || ""}`, true);
-  } catch (err) {
-    console.error(err);
-    updateStatus("サインインに失敗しました");
-    updateSsoStatus("サインイン失敗");
-  }
-}
-
-function handleSsoLogout() {
-  if (!msalClient) {
-    updateSsoStatus("未設定");
-    return;
-  }
-  const account = msalClient.getActiveAccount();
-  if (account) {
-    msalClient.logoutPopup({ account });
-  }
-  msalAccount = null;
-  updateSsoStatus("未サインイン");
 }
 
 function updateStatus(text) {
@@ -373,15 +269,11 @@ function resetSettings() {
     "ttsRate",
     "ttsPitch",
     "ttsVoice",
-    "ssoClientId",
-    "ssoTenantId",
-    "ssoScope",
     "selectedPoemId",
   ];
   keys.forEach((k) => localStorage.removeItem(k));
   cancelAllTimers();
   loadSettings();
-  initMsalClient();
   buildQueue();
   updateReciteGapLabel();
   updateDisplay(null);
@@ -538,11 +430,21 @@ function ensureAudioElement() {
   return audioElement;
 }
 
+function normalizeSharePointAudioUrl(url) {
+  if (!url) return url;
+  const hasDownload = /[?&]download=1(?:&|$)/.test(url);
+  if (/sharepoint\.com/.test(url) && !hasDownload) {
+    return url.includes("?") ? `${url}&download=1` : `${url}?download=1`;
+  }
+  return url;
+}
+
 function playViaAudio(poem) {
   return new Promise((resolve) => {
     cancelPlayback();
     const audio = ensureAudioElement();
-    const src = poem.audio || poem.audioUrl || poem.audio_url;
+    const rawSrc = poem.audio_url || poem.audio || poem.audioUrl;
+    const src = normalizeSharePointAudioUrl(rawSrc);
     if (!src) {
       updateStatus("音声ファイルがありません");
       resolve();
@@ -561,17 +463,13 @@ function playViaAudio(poem) {
       audio.removeEventListener("ended", handleEnd);
       audio.removeEventListener("error", handleError);
       currentAudioCleanup = null;
-      if (audioObjectUrl) {
-        URL.revokeObjectURL(audioObjectUrl);
-        audioObjectUrl = null;
-      }
     };
     const handleEnd = () => {
       cleanup();
       safeResolve();
     };
     const handleError = () => {
-      updateStatus("音声再生に失敗しました");
+      updateStatus("音声再生に失敗しました。SharePointにサインインしているか確認してください。");
       cleanup();
       safeResolve();
     };
@@ -579,42 +477,12 @@ function playViaAudio(poem) {
     currentAudioCleanup = cleanup;
     audio.addEventListener("ended", handleEnd, { once: true });
     audio.addEventListener("error", handleError, { once: true });
-    const requiresAuth = /sharepoint\.com/.test(src);
-    const startPlayback = (audioUrl) => {
-      audio.src = audioUrl;
-      audio.play().catch(() => {
-        updateStatus("音声の再生開始に失敗しました");
-        cleanup();
-        safeResolve();
-      });
-    };
-
-    if (requiresAuth && !msalClient) {
-      updateStatus("認証設定が必要です (Microsoft 365 サインイン)");
+    audio.src = src;
+    audio.play().catch(() => {
+      updateStatus("音声の再生開始に失敗しました。SharePointにサインインしているか確認してください。");
       cleanup();
       safeResolve();
-    } else if (requiresAuth && msalClient) {
-      getAccessToken()
-        .then((token) =>
-          fetch(src, { headers: { Authorization: `Bearer ${token}` } })
-        )
-        .then((resp) => {
-          if (!resp.ok) throw new Error("audio fetch failed");
-          return resp.blob();
-        })
-        .then((blob) => {
-          audioObjectUrl = URL.createObjectURL(blob);
-          startPlayback(audioObjectUrl);
-        })
-        .catch((err) => {
-          console.error(err);
-          updateStatus("認証付き音声の取得に失敗しました");
-          cleanup();
-          safeResolve();
-        });
-    } else {
-      startPlayback(src);
-    }
+    });
   });
 }
 
@@ -706,11 +574,6 @@ function attachEventListeners() {
     moveQueueToSelectedPoem(elements.poemSelect.value);
   });
   elements.resetButton.addEventListener("click", resetSettings);
-  elements.ssoClientId.addEventListener("input", () => saveSetting("ssoClientId", elements.ssoClientId.value));
-  elements.ssoTenantId.addEventListener("input", () => saveSetting("ssoTenantId", elements.ssoTenantId.value));
-  elements.ssoScope.addEventListener("input", () => saveSetting("ssoScope", elements.ssoScope.value));
-  elements.ssoLogin.addEventListener("click", handleSsoLogin);
-  elements.ssoLogout.addEventListener("click", handleSsoLogout);
   elements.nextButton.addEventListener("click", handleNextClick);
   elements.startButton.addEventListener("click", () => {
     primeAudioUnlock();
@@ -723,7 +586,6 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSettings();
   updateReciteGapLabel();
   attachEventListeners();
-  initMsalClient();
   populateVoices();
   if ("speechSynthesis" in window) {
     window.speechSynthesis.onvoiceschanged = populateVoices;

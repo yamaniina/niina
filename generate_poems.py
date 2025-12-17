@@ -74,7 +74,7 @@ def load_existing_audio_map(path: Path):
         return {}
     mapping = {}
     for item in data:
-        audio = item.get('audio') or item.get('audio_url') or item.get('audioUrl')
+        audio = item.get('audio_url') or item.get('audio') or item.get('audioUrl')
         if audio:
             mapping[item.get('id')] = audio
     return mapping
@@ -106,7 +106,7 @@ def write_poems_json(path, records, audio_map):
     ]
     for r in records:
         audio = audio_map.get(r['id'])
-        data.append({
+        base = {
             'id': r['id'],
             'type': 'poem',
             'kami_kana': r['kami_kana'],
@@ -115,8 +115,11 @@ def write_poems_json(path, records, audio_map):
             'shimo': r['shimo_kana'],
             'kimariji_len': r['kimariji_len'],
             'kimariji': r['kimariji'],
-            **({'audio': audio} if audio else {}),
-        })
+        }
+        if audio:
+            base['audio_url'] = audio
+            base['audio'] = audio
+        data.append(base)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
 
 
