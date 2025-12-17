@@ -1,0 +1,57 @@
+[
+  {
+    "id": "JYO",
+    "type": "joka",
+    "title": "序歌",
+    "text": "難波津に咲くやこの花冬ごもり今を春べと咲くやこの花",
+    "kimariji_len": 0
+  },
+  {
+    "id": "001",
+    "type": "poem",
+    "kami": "秋の田のかりほの庵の苫をあらみ",
+    "shimo": "わが衣手は露にぬれつつ",
+    "kimariji_len": 1,
+    "kimariji": "あ"
+  },
+  {
+    "id": "002",
+    "type": "poem",
+    "kami": "春過ぎて夏来にけらし白妙の",
+    "shimo": "衣ほすてふ天の香具山",
+    "kimariji_len": 2,
+    "kimariji": "はる"
+  },
+  {
+    "id": "003",
+    "type": "poem",
+    "kami": "足引の山鳥の尾のしだり尾の",
+    "shimo": "ながながし夜をひとりかも寝む",
+    "kimariji_len": 3,
+    "kimariji": "あし"
+  },
+  {
+    "id": "004",
+    "type": "poem",
+    "kami": "田子の浦にうち出でてみれば白妙の",
+    "shimo": "富士の高嶺に雪は降りつつ",
+    "kimariji_len": 4,
+    "kimariji": "たごの"
+  },
+  {
+    "id": "005",
+    "type": "poem",
+    "kami": "奥山にもみじ踏み分け鳴く鹿の",
+    "shimo": "声聞く時ぞ秋は悲しき",
+    "kimariji_len": 5,
+    "kimariji": "おくやま"
+  },
+  {
+    "id": "006",
+    "type": "poem",
+    "kami": "かささぎの渡せる橋に置く霜の",
+    "shimo": "白きを見れば夜ぞ更けにける",
+    "kimariji_len": 6,
+    "kimariji": "かささぎ"
+  }
+]
