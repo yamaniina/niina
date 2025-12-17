@@ -85,8 +85,8 @@ function updateDisplay(poem) {
     return;
   }
   elements.poemDisplay.querySelector(".poem-id").textContent = `${poem.id} ${poem.title || ""}`.trim();
-  elements.poemKami.textContent = poem.kami || poem.text || "";
-  elements.poemShimo.textContent = poem.shimo || "";
+  elements.poemKami.textContent = poem.kami_kana || poem.kami || poem.text || "";
+  elements.poemShimo.textContent = poem.shimo_kana || poem.shimo || "";
   elements.poemKimariji.textContent = poem.kimariji
     ? `決まり字: ${poem.kimariji} (${poem.kimariji_len}字)`
     : "決まり字: --";
@@ -244,20 +244,20 @@ function buildTtsText(poem) {
 }
 
 function buildNormalPoemText(poem) {
-  const kami = (poem.kami || "").replace(/\s+/g, "、");
-  const shimo = (poem.shimo || "").replace(/\s+/g, "、");
+  const kami = (poem.kami_kana || poem.kami || "").replace(/\s+/g, "、");
+  const shimo = (poem.shimo_kana || poem.shimo || "").replace(/\s+/g, "、");
   return `${kami}……${shimo}`;
 }
 
 function buildReciterPoemText(poem) {
-  const kami = `${(poem.kami || "").replace(/\s+/g, "、")}。`;
-  const shimo = `${(poem.shimo || "").replace(/\s+/g, "、")}。`;
+  const kami = `${(poem.kami_kana || poem.kami || "").replace(/\s+/g, "、")}。`;
+  const shimo = `${(poem.shimo_kana || poem.shimo || "").replace(/\s+/g, "、")}。`;
   return `${kami}\n\n…………\n\n${shimo}`;
 }
 
 function buildReciterPoemSegments(poem) {
-  const kami = `${(poem.kami || "").replace(/\s+/g, "、")}。`;
-  const shimo = `${(poem.shimo || "").replace(/\s+/g, "、")}。`;
+  const kami = `${(poem.kami_kana || poem.kami || "").replace(/\s+/g, "、")}。`;
+  const shimo = `${(poem.shimo_kana || poem.shimo || "").replace(/\s+/g, "、")}。`;
   return { kamiText: kami, shimoText: shimo };
 }
 
