@@ -31,7 +31,25 @@
         <label class="inline-toggle"><input type="checkbox" id="shuffleToggle" /> シャッフル</label>
       </div>
       <div class="control-row">
+        <label for="audioMode">音声モード:</label>
+        <select id="audioMode">
+          <option value="audio">audio</option>
+          <option value="tts">tts</option>
+        </select>
+      </div>
+      <div class="control-row tts-row">
+        <label for="ttsRate">rate</label>
+        <input type="range" id="ttsRate" min="0.85" max="1.1" step="0.01" />
+        <label for="ttsPitch">pitch</label>
+        <input type="range" id="ttsPitch" min="0.9" max="1.1" step="0.01" />
+      </div>
+      <div class="control-row tts-row">
+        <label for="ttsVoice">voice</label>
+        <select id="ttsVoice"></select>
+      </div>
+      <div class="control-row">
         <button id="nextButton">次へ</button>
+        <button id="startButton" class="secondary">スタート（音声許可）</button>
       </div>
       <p class="hint">「次へ」を押すと2秒待ってから再生し、再生開始と同時に表示が更新されます。</p>
     </section>

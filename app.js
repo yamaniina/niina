@@ -8,7 +8,12 @@ const elements = {
   practiceMode: document.getElementById("practiceMode"),
   skipJoka: document.getElementById("skipJoka"),
   shuffleToggle: document.getElementById("shuffleToggle"),
+  audioMode: document.getElementById("audioMode"),
+  ttsRate: document.getElementById("ttsRate"),
+  ttsPitch: document.getElementById("ttsPitch"),
+  ttsVoice: document.getElementById("ttsVoice"),
   nextButton: document.getElementById("nextButton"),
+  startButton: document.getElementById("startButton"),
   status: document.getElementById("status"),
   poemDisplay: document.getElementById("poemDisplay"),
   poemKami: document.getElementById("poemKami"),
@@ -26,16 +31,29 @@ let timers = [];
 let status = STATUS.IDLE;
 let hasPlayedJoka = false;
 const WAIT_DURATION = 2000;
-const PLAY_DURATION = 4000;
+let audioElement = null;
+let currentAudioCleanup = null;
+let currentTtsCleanup = null;
+let currentUtterance = null;
+let voices = [];
+let speechPrimed = false;
 
 function loadSettings() {
   const practiceMode = localStorage.getItem("practiceMode") || "all";
   const skipJoka = localStorage.getItem("skipJoka") === "true";
   const shuffleEnabled = localStorage.getItem("shuffleEnabled") === "true";
+  const audioMode = localStorage.getItem("audioMode") || "audio";
+  const ttsRate = Number(localStorage.getItem("ttsRate")) || 1;
+  const ttsPitch = Number(localStorage.getItem("ttsPitch")) || 1;
+  const ttsVoice = localStorage.getItem("ttsVoice") || "";
 
   elements.practiceMode.value = practiceMode;
   elements.skipJoka.checked = skipJoka;
   elements.shuffleToggle.checked = shuffleEnabled;
+  elements.audioMode.value = audioMode;
+  elements.ttsRate.value = ttsRate;
+  elements.ttsPitch.value = ttsPitch;
+  elements.ttsVoice.setAttribute("data-saved", ttsVoice);
 }
 
 function saveSetting(key, value) {
@@ -71,6 +89,7 @@ function updateQueueInfo() {
 function cancelAllTimers() {
   timers.forEach((t) => clearTimeout(t));
   timers = [];
+  cancelPlayback();
   status = STATUS.IDLE;
 }
 
@@ -118,11 +137,21 @@ function finishPlayback(afterFinish) {
   if (afterFinish) afterFinish();
 }
 
+function playItem(poem) {
+  const mode = elements.audioMode.value;
+  if (mode === "tts") {
+    return playViaTts(poem);
+  }
+  return playViaAudio(poem);
+}
+
 function startPlayback(poem, onFinish) {
   status = STATUS.PLAYING;
   updateDisplay(poem);
   updateStatus(`再生中: ${poem.id}`);
-  scheduleTimeout(() => finishPlayback(onFinish), PLAY_DURATION);
+  playItem(poem)
+    .catch(() => {})
+    .finally(() => finishPlayback(onFinish));
 }
 
 function waitThenPlay(poem, onFinish) {
@@ -181,6 +210,171 @@ function handleNextClick() {
   playNextFromQueue();
 }
 
+function cancelPlayback() {
+  if (currentAudioCleanup) {
+    currentAudioCleanup();
+    currentAudioCleanup = null;
+  }
+  if (currentTtsCleanup) {
+    currentTtsCleanup();
+    currentTtsCleanup = null;
+  }
+}
+
+function buildTtsText(poem) {
+  if (poem.type === "joka") {
+    return poem.text || "";
+  }
+  const kami = (poem.kami || "").replace(/\s+/g, "、");
+  const shimo = (poem.shimo || "").replace(/\s+/g, "、");
+  return `${kami}……${shimo}`;
+}
+
+function playViaTts(poem) {
+  return new Promise((resolve, reject) => {
+    if (!("speechSynthesis" in window)) {
+      updateStatus("このブラウザは自動音声に対応していません");
+      resolve();
+      return;
+    }
+
+    cancelPlayback();
+    const utterance = new SpeechSynthesisUtterance(buildTtsText(poem));
+    currentUtterance = utterance;
+    utterance.rate = Number(elements.ttsRate.value) || 1;
+    utterance.pitch = Number(elements.ttsPitch.value) || 1;
+    const selectedVoiceUri = elements.ttsVoice.value;
+    if (selectedVoiceUri) {
+      const voice = voices.find((v) => v.voiceURI === selectedVoiceUri || v.name === selectedVoiceUri);
+      if (voice) utterance.voice = voice;
+    }
+
+    let finished = false;
+    const safeResolve = () => {
+      if (finished) return;
+      finished = true;
+      resolve();
+    };
+    const safeReject = () => {
+      if (finished) return;
+      finished = true;
+      reject();
+    };
+
+    const handleEnd = () => {
+      currentTtsCleanup?.();
+      currentTtsCleanup = null;
+      safeResolve();
+    };
+    const handleError = () => {
+      currentTtsCleanup?.();
+      currentTtsCleanup = null;
+      safeReject();
+    };
+
+    currentTtsCleanup = () => {
+      utterance.onend = null;
+      utterance.onerror = null;
+      speechSynthesis.cancel();
+      currentUtterance = null;
+      safeResolve();
+    };
+
+    utterance.onend = handleEnd;
+    utterance.onerror = handleError;
+    speechSynthesis.speak(utterance);
+  });
+}
+
+function ensureAudioElement() {
+  if (!audioElement) {
+    audioElement = new Audio();
+  }
+  return audioElement;
+}
+
+function playViaAudio(poem) {
+  return new Promise((resolve) => {
+    cancelPlayback();
+    const audio = ensureAudioElement();
+    const src = poem.audio || poem.audioUrl || poem.audio_url;
+    if (!src) {
+      updateStatus("音声ファイルがありません");
+      resolve();
+      return;
+    }
+
+    let finished = false;
+    const safeResolve = () => {
+      if (finished) return;
+      finished = true;
+      resolve();
+    };
+    const cleanup = () => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.removeEventListener("ended", handleEnd);
+      audio.removeEventListener("error", handleError);
+      currentAudioCleanup = null;
+    };
+    const handleEnd = () => {
+      cleanup();
+      safeResolve();
+    };
+    const handleError = () => {
+      updateStatus("音声再生に失敗しました");
+      cleanup();
+      safeResolve();
+    };
+
+    currentAudioCleanup = cleanup;
+    audio.addEventListener("ended", handleEnd, { once: true });
+    audio.addEventListener("error", handleError, { once: true });
+    audio.src = src;
+    audio.play().catch(() => {
+      updateStatus("音声の再生開始に失敗しました");
+      cleanup();
+      safeResolve();
+    });
+  });
+}
+
+function populateVoices() {
+  if (!("speechSynthesis" in window)) return;
+  voices = window.speechSynthesis.getVoices();
+  elements.ttsVoice.innerHTML = "";
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "(デフォルト)";
+  elements.ttsVoice.appendChild(placeholder);
+  voices.forEach((voice) => {
+    const option = document.createElement("option");
+    option.value = voice.voiceURI;
+    option.textContent = `${voice.name} (${voice.lang})`;
+    elements.ttsVoice.appendChild(option);
+  });
+  const saved = elements.ttsVoice.getAttribute("data-saved") || localStorage.getItem("ttsVoice") || "";
+  elements.ttsVoice.value = saved;
+}
+
+function primeSpeechSynthesis() {
+  if (!("speechSynthesis" in window) || speechPrimed) return;
+  const utter = new SpeechSynthesisUtterance(" ");
+  window.speechSynthesis.speak(utter);
+  window.speechSynthesis.cancel();
+  speechPrimed = true;
+}
+
+function primeAudioUnlock() {
+  const audio = ensureAudioElement();
+  audio.muted = true;
+  audio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=";
+  audio.play().catch(() => {}).finally(() => {
+    audio.pause();
+    audio.muted = false;
+  });
+}
+
 async function loadPoems() {
   try {
     const response = await fetch("poems.json");
@@ -208,12 +402,33 @@ function attachEventListeners() {
     saveSetting("shuffleEnabled", elements.shuffleToggle.checked);
     buildQueue();
   });
+  elements.audioMode.addEventListener("change", () => {
+    saveSetting("audioMode", elements.audioMode.value);
+  });
+  elements.ttsRate.addEventListener("input", () => {
+    saveSetting("ttsRate", elements.ttsRate.value);
+  });
+  elements.ttsPitch.addEventListener("input", () => {
+    saveSetting("ttsPitch", elements.ttsPitch.value);
+  });
+  elements.ttsVoice.addEventListener("change", () => {
+    saveSetting("ttsVoice", elements.ttsVoice.value);
+  });
   elements.nextButton.addEventListener("click", handleNextClick);
+  elements.startButton.addEventListener("click", () => {
+    primeAudioUnlock();
+    primeSpeechSynthesis();
+    updateStatus("音声の準備が完了しました");
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   loadSettings();
   attachEventListeners();
+  populateVoices();
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.onvoiceschanged = populateVoices;
+  }
   loadPoems();
   updateQueueInfo();
 });

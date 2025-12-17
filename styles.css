@@ -63,6 +63,10 @@ body {
   flex-wrap: wrap;
 }
 
+.control-row.tts-row input[type="range"] {
+  width: 160px;
+}
+
 select,
 button,
 label input[type="checkbox"] {
@@ -84,6 +88,11 @@ button {
   border: 1px solid #1c3a63;
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button.secondary {
+  background: #0c1c32;
+  border: 1px solid var(--border);
 }
 
 button:hover {
