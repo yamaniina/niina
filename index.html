@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>決まり字練習モード</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>百人一首 決まり字練習</h1>
+    <p class="description">練習モードを切り替えて決まり字ごとに再生キューを作れます。</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="control-row">
+        <label for="practiceMode">練習モード:</label>
+        <select id="practiceMode">
+          <option value="all">すべて</option>
+          <option value="1">1字決まり</option>
+          <option value="2">2字決まり</option>
+          <option value="3">3字決まり</option>
+          <option value="4">4字決まり</option>
+          <option value="5">5字決まり</option>
+          <option value="6">6字決まり</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label><input type="checkbox" id="skipJoka" /> 序歌をスキップ</label>
+        <label class="inline-toggle"><input type="checkbox" id="shuffleToggle" /> シャッフル</label>
+      </div>
+      <div class="control-row">
+        <label for="audioMode">音声モード:</label>
+        <select id="audioMode">
+          <option value="audio">audio</option>
+          <option value="tts">tts</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="reciteMode">読みモード:</label>
+        <select id="reciteMode">
+          <option value="normal">通常</option>
+          <option value="reciter">読み手風（上の句→溜め→下の句）</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="reciteGapMs">溜め時間(ms):</label>
+        <input type="range" id="reciteGapMs" min="800" max="1600" step="400" />
+        <span class="range-value" id="reciteGapLabel"></span>
+      </div>
+      <div class="control-row tts-row">
+        <label for="ttsRate">rate</label>
+        <input type="range" id="ttsRate" min="0.85" max="1.1" step="0.01" />
+        <label for="ttsPitch">pitch</label>
+        <input type="range" id="ttsPitch" min="0.9" max="1.1" step="0.01" />
+      </div>
+      <div class="control-row tts-row">
+        <label for="ttsVoice">voice</label>
+        <select id="ttsVoice"></select>
+      </div>
+      <div class="control-row">
+        <button id="nextButton">次へ</button>
+        <button id="startButton" class="secondary">スタート（音声許可）</button>
+      </div>
+      <p class="hint">「次へ」を押すと2秒待ってから再生し、再生開始と同時に表示が更新されます。</p>
+    </section>
+
+    <section class="panel playback-panel">
+      <h2>現在の状態</h2>
+      <div id="status" class="status">読み込み中…</div>
+      <div class="poem-display" id="poemDisplay">
+        <p class="poem-id">--</p>
+        <p class="poem-kimi" id="poemKimariji">決まり字: --</p>
+        <p class="poem-text" id="poemKami">上の句</p>
+        <p class="poem-text" id="poemShimo">下の句</p>
+      </div>
+      <div class="queue-info">
+        <p>キュー: <span id="queueInfo">--</span></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
