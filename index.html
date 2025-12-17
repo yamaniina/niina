@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>決まり字練習モード</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="app-header">
-    <h1>百人一首 決まり字練習</h1>
-    <p class="description">練習モードを切り替えて決まり字ごとに再生キューを作れます。</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>決まり字練習モード</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js" defer></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>百人一首 決まり字練習</h1>
+      <p class="description">練習モードを切り替えて決まり字ごとに再生キューを作れます。</p>
   </header>
 
   <main class="layout">
@@ -29,6 +30,7 @@
       <div class="control-row">
         <label><input type="checkbox" id="skipJoka" /> 序歌をスキップ</label>
         <label class="inline-toggle"><input type="checkbox" id="shuffleToggle" /> シャッフル</label>
+        <button id="resetButton" class="secondary">リセット</button>
       </div>
       <div class="control-row">
         <label for="audioMode">音声モード:</label>
@@ -60,10 +62,38 @@
         <select id="ttsVoice"></select>
       </div>
       <div class="control-row">
+        <label for="poemSelect">歌番号:</label>
+        <select id="poemSelect">
+          <option value="">-- 選択 --</option>
+        </select>
+        <span class="hint-inline">選択した番号の位置から再生を再開します。</span>
+      </div>
+      <div class="control-row">
         <button id="nextButton">次へ</button>
         <button id="startButton" class="secondary">スタート（音声許可）</button>
       </div>
       <p class="hint">「次へ」を押すと2秒待ってから再生し、再生開始と同時に表示が更新されます。</p>
+      <div class="sso-block">
+        <h3>Microsoft 365 サインイン</h3>
+        <div class="control-row sso-row">
+          <label for="ssoClientId">Client ID</label>
+          <input id="ssoClientId" type="text" placeholder="00000000-0000-0000-0000-000000000000" />
+        </div>
+        <div class="control-row sso-row">
+          <label for="ssoTenantId">Tenant ID</label>
+          <input id="ssoTenantId" type="text" placeholder="organizations または tenant GUID" />
+        </div>
+        <div class="control-row sso-row">
+          <label for="ssoScope">Scope</label>
+          <input id="ssoScope" type="text" placeholder="https://tenant.sharepoint.com/.default" />
+        </div>
+        <div class="control-row sso-row">
+          <button id="ssoLogin">サインイン</button>
+          <button id="ssoLogout" class="secondary">サインアウト</button>
+          <span id="ssoStatus" class="sso-status">未設定</span>
+        </div>
+        <p class="hint">SharePoint音声を開く場合は、Client ID/Tenant/Scopeを設定してサインインしてください。</p>
+      </div>
     </section>
 
     <section class="panel playback-panel">

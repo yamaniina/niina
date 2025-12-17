@@ -63,6 +63,15 @@ body {
   flex-wrap: wrap;
 }
 
+.control-row input[type="text"] {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0c1c32;
+  color: var(--text);
+  min-width: 260px;
+}
+
 .control-row.tts-row input[type="range"] {
   width: 160px;
 }
@@ -116,6 +125,34 @@ button:active {
   color: var(--muted);
   margin: 0;
   font-size: 0.9rem;
+}
+
+.hint-inline {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.sso-block {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.sso-block h3 {
+  margin: 0 0 8px;
+}
+
+.sso-row {
+  align-items: center;
+}
+
+.sso-status {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.sso-status.active {
+  color: #7cedff;
 }
 
 .playback-panel h2 {
