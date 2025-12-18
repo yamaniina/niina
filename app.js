@@ -18,6 +18,12 @@ const elements = {
   resetButton: document.getElementById("resetButton"),
   poemSelect: document.getElementById("poemSelect"),
   nextButton: document.getElementById("nextButton"),
+  gateLockButton: document.getElementById("gateLockButton"),
+  gate: document.getElementById("gate"),
+  gateForm: document.getElementById("gateForm"),
+  gateInput: document.getElementById("gateInput"),
+  gateError: document.getElementById("gateError"),
+  appRoot: document.getElementById("appRoot"),
   status: document.getElementById("status"),
   poemDisplay: document.getElementById("poemDisplay"),
   poemKami: document.getElementById("poemKami"),
@@ -43,6 +49,9 @@ let voices = [];
 let speechPrimed = false;
 let ttsRunId = 0;
 let mediaUnlocked = false;
+let appInitialized = false;
+const GATE_KEY = "gate_unlocked";
+const PASSCODE = "にいやま";
 
 function loadSettings() {
   const practiceMode = localStorage.getItem("practiceMode") || "all";
@@ -102,6 +111,20 @@ function updateQueueInfo() {
     : "なし";
 }
 
+function showGate() {
+  elements.gate?.classList.remove("hidden");
+  elements.appRoot?.classList.add("hidden");
+  if (elements.gateInput) {
+    elements.gateInput.value = "";
+    setTimeout(() => elements.gateInput.focus(), 0);
+  }
+}
+
+function showApp() {
+  elements.gate?.classList.add("hidden");
+  elements.appRoot?.classList.remove("hidden");
+}
+
 function populatePoemSelect() {
   if (!elements.poemSelect) return;
   const saved = elements.poemSelect.getAttribute("data-saved") || "";
@@ -121,6 +144,23 @@ function moveQueueToSelectedPoem(poemId) {
   if (idx === -1) return;
   queueIndex = idx;
   updateQueueInfo();
+}
+
+function unlockGate() {
+  localStorage.setItem(GATE_KEY, "1");
+  showApp();
+  if (!appInitialized) {
+    initApp();
+  }
+  if (elements.gateError) elements.gateError.textContent = "";
+}
+
+function lockGate() {
+  localStorage.removeItem(GATE_KEY);
+  mediaUnlocked = false;
+  cancelAllTimers();
+  updateStatus("ロックされました。合言葉を入力して再開してください。");
+  showGate();
 }
 
 function cancelAllTimers() {
@@ -463,7 +503,10 @@ function playViaAudio(poem) {
   return new Promise((resolve) => {
     cancelPlayback();
     const audio = ensureAudioElement();
-    const rawSrc = poem.audio_url || poem.audio || poem.audioUrl;
+    let rawSrc = poem.audio_url || poem.audio || poem.audioUrl;
+    if (!rawSrc && poem?.id) {
+      rawSrc = `assets/audio/${poem.id}.m4a`;
+    }
     const src = normalizeSharePointAudioUrl(rawSrc);
     if (!src) {
       updateStatus("音声ファイルがありません");
@@ -606,7 +649,19 @@ function attachEventListeners() {
   elements.nextButton.addEventListener("click", handleNextClick);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function handleGateSubmit(event) {
+  event.preventDefault();
+  const value = (elements.gateInput?.value || "").trim();
+  if (value === PASSCODE) {
+    unlockGate();
+  } else if (elements.gateError) {
+    elements.gateError.textContent = "合言葉が違います";
+  }
+}
+
+function initApp() {
+  if (appInitialized) return;
+  appInitialized = true;
   loadSettings();
   updateReciteGapLabel();
   attachEventListeners();
@@ -616,4 +671,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   loadPoems();
   updateQueueInfo();
+}
+
+function setupGate() {
+  elements.gateForm?.addEventListener("submit", handleGateSubmit);
+  elements.gateInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleGateSubmit(e);
+    }
+  });
+  elements.gateLockButton?.addEventListener("click", () => {
+    lockGate();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupGate();
+  if (localStorage.getItem(GATE_KEY) === "1") {
+    showApp();
+    initApp();
+  } else {
+    showGate();
+  }
 });

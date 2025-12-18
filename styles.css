@@ -112,6 +112,10 @@ button.secondary {
   border: 1px solid var(--border);
 }
 
+.hidden {
+  display: none !important;
+}
+
 button:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
@@ -189,4 +193,61 @@ button:active {
   select {
     width: 100%;
   }
+}
+
+.gate-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.gate-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.gate-desc {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.gate-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gate-form input[type="password"] {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0c1c32;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.gate-error {
+  color: #ff8f8f;
+  min-height: 20px;
+  margin-top: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
