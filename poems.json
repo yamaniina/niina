@@ -3,8 +3,10 @@
     "id": "JYO",
     "type": "joka",
     "title": "序歌",
-    "text": "ナニワヅニ サクヤコノハナ フユゴモリ イマヲハルベト サクヤコノハナ　イマヲハルベト サクヤコノハナ",
-    "kimariji_len": 0
+    "text": "ナニワヅニ サクヤコノハナ フユゴモリ イマヲハルベト サクヤコノハナ",
+    "kimariji_len": 0,
+    "audio_url": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCdrfP_FotRSY0UCUDtiETzAcJwM-cqg4LuBmalDoZsh-A?e=iDW5uT",
+    "audio": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCdrfP_FotRSY0UCUDtiETzAcJwM-cqg4LuBmalDoZsh-A?e=iDW5uT"
   },
   {
     "id": "001",
@@ -174,7 +176,9 @@
     "kami": "チハヤブル カミヨモキカズ タツタガワ",
     "shimo": "カラクレナイニ ミズククルトワ",
     "kimariji_len": 2,
-    "kimariji": "チハ"
+    "kimariji": "チハ",
+    "audio_url": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQBnHlwIRiHjTqW76GvFOXAGAWS8yIHaML7lvgMV2UD74wE?e=ETmfkl",
+    "audio": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQBnHlwIRiHjTqW76GvFOXAGAWS8yIHaML7lvgMV2UD74wE?e=ETmfkl"
   },
   {
     "id": "018",

@@ -9,7 +9,9 @@ POEMS_JSON_PATH = Path('poems.json')
 # anything already present in poems.json so freshly added URLs are retained even
 # after regeneration.
 AUDIO_OVERRIDES = {
+    "JYO": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCdrfP_FotRSY0UCUDtiETzAcJwM-cqg4LuBmalDoZsh-A?e=iDW5uT",
     "022": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCcqSSnYpz6QbFCiAZkwCdeAXrT20uPTiAEc8m4K_PIS20?e=QEJsFu",
+    "017": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQBnHlwIRiHjTqW76GvFOXAGAWS8yIHaML7lvgMV2UD74wE?e=ETmfkl",
 }
 
 
@@ -95,15 +97,19 @@ def write_tsv(path, records):
 
 
 def write_poems_json(path, records, audio_map):
-    data = [
-        {
-            'id': 'JYO',
-            'type': 'joka',
-            'title': '序歌',
-            'text': 'ナニワヅニ サクヤコノハナ フユゴモリ イマヲハルベト サクヤコノハナ',
-            'kimariji_len': 0,
-        }
-    ]
+    data = []
+    joka = {
+        'id': 'JYO',
+        'type': 'joka',
+        'title': '序歌',
+        'text': 'ナニワヅニ サクヤコノハナ フユゴモリ イマヲハルベト サクヤコノハナ',
+        'kimariji_len': 0,
+    }
+    joka_audio = audio_map.get('JYO')
+    if joka_audio:
+        joka['audio_url'] = joka_audio
+        joka['audio'] = joka_audio
+    data.append(joka)
     for r in records:
         audio = audio_map.get(r['id'])
         base = {
