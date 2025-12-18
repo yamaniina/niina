@@ -5,15 +5,6 @@ from pathlib import Path
 RAW_PATH = Path('raw_data.txt')
 POEMS_JSON_PATH = Path('poems.json')
 
-# Hard-coded overrides for newly published audio files. These take precedence over
-# anything already present in poems.json so freshly added URLs are retained even
-# after regeneration.
-AUDIO_OVERRIDES = {
-    "JYO": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCdrfP_FotRSY0UCUDtiETzAcJwM-cqg4LuBmalDoZsh-A?e=iDW5uT",
-    "022": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQCcqSSnYpz6QbFCiAZkwCdeAXrT20uPTiAEc8m4K_PIS20?e=QEJsFu",
-    "017": "https://fastjyoto.sharepoint.com/:u:/s/msteams_4f00e7/IQBnHlwIRiHjTqW76GvFOXAGAWS8yIHaML7lvgMV2UD74wE?e=ETmfkl",
-}
-
 
 def parse_lines(raw_text):
     poems = []
@@ -67,21 +58,6 @@ def build_records(poems):
     return records
 
 
-def load_existing_audio_map(path: Path):
-    if not path.exists():
-        return {}
-    try:
-        data = json.loads(path.read_text(encoding='utf-8'))
-    except Exception:
-        return {}
-    mapping = {}
-    for item in data:
-        audio = item.get('audio_url') or item.get('audio') or item.get('audioUrl')
-        if audio:
-            mapping[item.get('id')] = audio
-    return mapping
-
-
 def write_tsv(path, records):
     header = ['id', 'kimariji_len', 'kimariji', 'kami_kana', 'shimo_kana']
     lines = ['\t'.join(header)]
@@ -96,22 +72,20 @@ def write_tsv(path, records):
     path.write_text('\n'.join(lines), encoding='utf-8')
 
 
-def write_poems_json(path, records, audio_map):
+def write_poems_json(path, records):
     data = []
-    joka = {
+    joka_audio = "assets/audio/JYO.m4a"
+    data.append({
         'id': 'JYO',
         'type': 'joka',
         'title': '序歌',
         'text': 'ナニワヅニ サクヤコノハナ フユゴモリ イマヲハルベト サクヤコノハナ',
         'kimariji_len': 0,
-    }
-    joka_audio = audio_map.get('JYO')
-    if joka_audio:
-        joka['audio_url'] = joka_audio
-        joka['audio'] = joka_audio
-    data.append(joka)
+        'audio_url': joka_audio,
+        'audio': joka_audio,
+    })
     for r in records:
-        audio = audio_map.get(r['id'])
+        audio = f"assets/audio/{r['id']}.m4a"
         base = {
             'id': r['id'],
             'type': 'poem',
@@ -121,10 +95,9 @@ def write_poems_json(path, records, audio_map):
             'shimo': r['shimo_kana'],
             'kimariji_len': r['kimariji_len'],
             'kimariji': r['kimariji'],
+            'audio_url': audio,
+            'audio': audio,
         }
-        if audio:
-            base['audio_url'] = audio
-            base['audio'] = audio
         data.append(base)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
 
@@ -137,10 +110,8 @@ def main():
             print(f"Warning: line {line_no} has fewer than 5 tokens: {content}")
     compute_kimariji(poems)
     records = build_records(poems)
-    existing_audio = load_existing_audio_map(POEMS_JSON_PATH)
-    existing_audio.update(AUDIO_OVERRIDES)
     write_tsv(Path('output.tsv'), records)
-    write_poems_json(Path('poems.json'), records, existing_audio)
+    write_poems_json(Path('poems.json'), records)
     print(f"Processed {len(records)} poems")
 
 
