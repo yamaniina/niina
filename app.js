@@ -18,7 +18,6 @@ const elements = {
   resetButton: document.getElementById("resetButton"),
   poemSelect: document.getElementById("poemSelect"),
   nextButton: document.getElementById("nextButton"),
-  startButton: document.getElementById("startButton"),
   status: document.getElementById("status"),
   poemDisplay: document.getElementById("poemDisplay"),
   poemKami: document.getElementById("poemKami"),
@@ -43,6 +42,7 @@ let currentUtterance = null;
 let voices = [];
 let speechPrimed = false;
 let ttsRunId = 0;
+let mediaUnlocked = false;
 
 function loadSettings() {
   const practiceMode = localStorage.getItem("practiceMode") || "all";
@@ -118,16 +118,9 @@ function populatePoemSelect() {
 function moveQueueToSelectedPoem(poemId) {
   if (!poemId) return;
   const idx = queue.findIndex((p) => p.id === poemId);
-  if (idx === -1) {
-    updateStatus("選択した歌は現在のキューにありません");
-    return;
-  }
-  cancelAllTimers();
+  if (idx === -1) return;
   queueIndex = idx;
-  hasPlayedJoka = true;
   updateQueueInfo();
-  updateStatus(`歌番号 ${poemId} から再生します`);
-  updateDisplay(queue[queueIndex]);
 }
 
 function cancelAllTimers() {
@@ -202,7 +195,12 @@ function startPlayback(poem, onFinish) {
     .finally(() => finishPlayback(onFinish));
 }
 
-function waitThenPlay(poem, onFinish) {
+function playWithOptionalWait(poem, onFinish, { skipWait = false } = {}) {
+  const reciterMode = elements.reciteMode.value === "reciter";
+  if (skipWait || reciterMode) {
+    startPlayback(poem, onFinish);
+    return;
+  }
   status = STATUS.WAITING;
   updateStatus("次の歌まで2秒待機中…");
   scheduleTimeout(() => startPlayback(poem, onFinish), WAIT_DURATION);
@@ -214,37 +212,47 @@ function playJokaThenFirst() {
     playNextFromQueue();
     return;
   }
-  waitThenPlay(jokaPoem, () => {
+  playWithOptionalWait(jokaPoem, () => {
     hasPlayedJoka = true;
     if (!queue.length) {
       updateStatus("このモードの歌がありません");
       updateDisplay(null);
       return;
     }
-    scheduleTimeout(() => playNextFromQueue(), WAIT_DURATION);
+    if (elements.reciteMode.value === "reciter") {
+      playNextFromQueue();
+    } else {
+      scheduleTimeout(() => playNextFromQueue(), WAIT_DURATION);
+    }
   });
 }
 
-function playNextFromQueue() {
+function playFromQueueIndex(targetIndex, { skipWait = false } = {}) {
   cancelAllTimers();
   if (!queue.length) {
     updateStatus("このモードの歌がありません");
     updateDisplay(null);
     return;
   }
-  if (queueIndex >= queue.length) {
+  if (targetIndex >= queue.length) {
     updateStatus("キューを再構築してくださいまたは練習を終了します");
     return;
   }
+  queueIndex = targetIndex;
   const poem = queue[queueIndex];
-  waitThenPlay(poem, () => {
-    queueIndex += 1;
+  playWithOptionalWait(poem, () => {
+    queueIndex = Math.min(queueIndex + 1, queue.length);
     updateQueueInfo();
-  });
+  }, { skipWait });
   updateQueueInfo();
 }
 
+function playNextFromQueue() {
+  playFromQueueIndex(queueIndex);
+}
+
 function handleNextClick() {
+  ensureMediaUnlocked();
   cancelAllTimers();
   if (!hasPlayedJoka && !elements.skipJoka.checked) {
     playJokaThenFirst();
@@ -256,6 +264,18 @@ function handleNextClick() {
     return;
   }
   playNextFromQueue();
+}
+
+function playSelectedPoem(poemId) {
+  if (!poemId) return;
+  const idx = queue.findIndex((p) => p.id === poemId);
+  if (idx === -1) {
+    updateStatus("選択した歌は現在のキューにありません");
+    return;
+  }
+  ensureMediaUnlocked();
+  hasPlayedJoka = true;
+  playFromQueueIndex(idx, { skipWait: true });
 }
 
 function resetSettings() {
@@ -522,6 +542,13 @@ function primeAudioUnlock() {
   });
 }
 
+function ensureMediaUnlocked() {
+  if (mediaUnlocked) return;
+  primeAudioUnlock();
+  primeSpeechSynthesis();
+  mediaUnlocked = true;
+}
+
 async function loadPoems() {
   try {
     const response = await fetch("poems.json");
@@ -531,7 +558,7 @@ async function loadPoems() {
     jokaPoem = poems.find((p) => p.type === "joka") || null;
     populatePoemSelect();
     buildQueue();
-    updateStatus("準備完了。モードを選んで「次へ」を押してください。");
+    updateStatus("準備完了。「歌を詠む」を押して練習を始めてください。通常モードは2秒待機後、読み手モードは即時再生します。");
   } catch (error) {
     updateStatus("poems.json の読み込みに失敗しました");
     console.error(error);
@@ -571,15 +598,12 @@ function attachEventListeners() {
   });
   elements.poemSelect.addEventListener("change", () => {
     saveSetting("selectedPoemId", elements.poemSelect.value);
-    moveQueueToSelectedPoem(elements.poemSelect.value);
+    if (elements.poemSelect.value) {
+      playSelectedPoem(elements.poemSelect.value);
+    }
   });
   elements.resetButton.addEventListener("click", resetSettings);
   elements.nextButton.addEventListener("click", handleNextClick);
-  elements.startButton.addEventListener("click", () => {
-    primeAudioUnlock();
-    primeSpeechSynthesis();
-    updateStatus("音声の準備が完了しました");
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {

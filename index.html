@@ -41,8 +41,8 @@
       <div class="control-row">
         <label for="reciteMode">読みモード:</label>
         <select id="reciteMode">
-          <option value="normal">通常</option>
-          <option value="reciter">読み手風（上の句→溜め→下の句）</option>
+          <option value="normal">通常（2秒待ち）</option>
+          <option value="reciter">読み手（すぐ再生 / 上の句→溜め→下の句）</option>
         </select>
       </div>
       <div class="control-row">
@@ -65,13 +65,12 @@
         <select id="poemSelect">
           <option value="">-- 選択 --</option>
         </select>
-        <span class="hint-inline">選択した番号の位置から再生を再開します。</span>
+        <span class="hint-inline">選択した番号をすぐ再生します（キューはそのまま継続）。</span>
       </div>
       <div class="control-row">
-        <button id="nextButton">次へ</button>
-        <button id="startButton" class="secondary">スタート（音声許可）</button>
+        <button id="nextButton">歌を詠む</button>
       </div>
-      <p class="hint">「次へ」を押すと2秒待ってから再生し、再生開始と同時に表示が更新されます。</p>
+      <p class="hint">「歌を詠む」を押すと、通常モードは2秒後に再生、読み手モードはすぐ再生し、開始と同時に表示が更新されます。</p>
     </section>
 
     <section class="panel playback-panel">
